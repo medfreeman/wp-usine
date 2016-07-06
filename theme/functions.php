@@ -47,15 +47,13 @@ if ( ! function_exists( 'theme_setup' ) ) {
 			'comment-form',
 			'search-form',
 			'gallery',
-			'caption'
+			'caption',
 		) );
-
 
 		// Let wp know we want to use post thumbnails
 		/*
 		add_theme_support( 'post-thumbnails' );
 		*/
-
 
 		// Register navigation menus for theme
 		/*
@@ -65,28 +63,23 @@ if ( ! function_exists( 'theme_setup' ) ) {
 		) );
 		*/
 
-
 		// Let wp know we are going to handle styling galleries
 		/*
 		add_filter( 'use_default_gallery_style', '__return_false' );
 		*/
 
-
 		// Stop WP from printing emoji service on the front
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-
 		// Remove toolbar for all users in front end
-		show_admin_bar( false );
-
+		// show_admin_bar( false );
 
 		// Add Custom Image Sizes
 		/*
 		add_image_size( 'ExampleImageSize', 1200, 450, true ); // Example Image Size
 		...
 		*/
-
 
 		// WPML configuration
 		// disable plugin from printing styles and js
@@ -96,7 +89,6 @@ if ( ! function_exists( 'theme_setup' ) ) {
 			define( 'ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true );
 			define( 'ICL_DONT_LOAD_LANGUAGES_JS', true );
 		}
-
 
 		// Contact Form 7 Configuration needs to be done
 		// in wp-config.php. add the following snippet
@@ -108,7 +100,6 @@ if ( ! function_exists( 'theme_setup' ) ) {
 		define ( 'WPCF7_LOAD_CSS', false ); // Added to disable CSS loading
 		define ( 'WPCF7_AUTOP',    false ); // Added to disable adding <p> & <br> in form output
 		*/
-
 
 		// Register Autoloaders Loader
 		$theme_dir = get_template_directory();
@@ -166,7 +157,7 @@ if ( ! function_exists( 'theme_scripts_localize' ) ) {
 
 			$current_lang = $sitepress->get_current_language();
 			wp_localize_script( 'main', 'i18n', array(
-				'lang' => $current_lang
+				'lang' => $current_lang,
 			) );
 
 			$ajax_url_params['lang'] = $current_lang;
@@ -175,7 +166,7 @@ if ( ! function_exists( 'theme_scripts_localize' ) ) {
 		wp_localize_script( 'main', 'urls', array(
 			'home'  => home_url(),
 			'theme' => get_stylesheet_directory_uri(),
-			'ajax'  => add_query_arg( $ajax_url_params, admin_url( 'admin-ajax.php' ) )
+			'ajax'  => add_query_arg( $ajax_url_params, admin_url( 'admin-ajax.php' ) ),
 		) );
 	}
 }
