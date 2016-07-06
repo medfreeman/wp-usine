@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack-stream').webpack;
-var BowerWebpackPlugin = require('bower-webpack-plugin');
 
 // utils
 var deepMerge = require('../utils/deepMerge');
@@ -75,7 +74,11 @@ module.exports = deepMerge({
 
 			defaults: {
 				resolve: {
-					extensions: ['', '.js', '.jsx']
+					extensions: ['', '.js', '.jsx'],
+					modulesDirectories: [
+						'node_modules',
+						'bower_components'
+					]
 				},
 				output: {
 					chunkFilename: 'chunk-[name].js'
@@ -113,9 +116,11 @@ module.exports = deepMerge({
 					]
 				},
 				plugins: [
-					new BowerWebpackPlugin({
-						includes: /\.jsx?$/
-					})
+					new webpack.ResolverPlugin(
+						new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
+							'bower.json', ['main']
+						)
+					)
 				],
 				eslint: {
 					emitError: true,
