@@ -35,9 +35,3 @@ import '../svg/**/*.svg!../svg/sprite/**/*.svg';
  * Your theme's js starts
  * here...
  */
-
-// silly example:
-import obj from './scripts/example';
-
-/* eslint no-console: 0 */
-console.log(obj);
