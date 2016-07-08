@@ -20,12 +20,12 @@
  * }
  */
 module.exports = {
-	name: 'you_should_probably_change_this',
-	prettyName: 'You should probably change this...',
-
-	description: 'The 2015 theme for {Example.com}. Built by John & Jane Doe for {Example}',
-	version: '0.1.0',
-	author: 'John & Jane Doe <jd@example.com>',
-	authorURI: 'http://example.com',
+	name: 'usine',
+	prettyName: 'Usine',
+	themeURI: 'https://github.com/medfreeman/wp-theme-starter/tree/usine',
+	description: 'The 2016 theme for usine.ch. Built by Mehdi Lahlou',
+	version: '1.0.0',
+	author: 'Mehdi Lahlou <mehdi.lahlou@free.fr>',
+	authorURI: 'https://github.com/medfreeman',
 	license: 'GPLv2 or later'
 };
