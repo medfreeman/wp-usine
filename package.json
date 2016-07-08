@@ -54,6 +54,8 @@
     "gulp-watch": "4.3.5",
     "image-webpack-loader": "^1.8.0",
     "import-glob": "^1.4.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "lodash": "4.5.1",
     "map-stream": "0.0.6",
     "merge-stream": "1.0.0",

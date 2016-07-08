@@ -20,10 +20,10 @@ import '../fonts/**/*.{eot,otf,ttf,woff,woff2,svg}';
 import '../img/**/*.{gif,ico,jpg,jpeg,png,webp}';
 /**
  * Import
- * sass
+ * less
  *
  */
-import '../scss/*.scss';
+import '../less/*.less';
 /**
  * Import
  * svgs
