@@ -63,6 +63,7 @@
     "precss": "^1.4.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "vinyl-named": "1.1.0",
     "vinyl-transform": "1.0.0",
     "webpack": "1.12.14",
