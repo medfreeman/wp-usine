@@ -5,12 +5,13 @@
  *
  */
 import './vendor/webpack.publicPath';
+/* eslint no-extra-semi: 0 */
 /**
  * Import
  * fonts
  *
  */
-import '../fonts/**/*.{eot,otf,ttf,woff,woff2,svg}'
+import '../fonts/**/*.{eot,otf,ttf,woff,woff2,svg}';
 /**
  * Import
  * images
@@ -28,7 +29,7 @@ import '../scss/*.scss';
  * svgs
  *
  */
-import '../svg/**/*.svg!../svg/sprite/**/*.svg'
+import '../svg/**/*.svg!../svg/sprite/**/*.svg';
 
 /**
  * Your theme's js starts
