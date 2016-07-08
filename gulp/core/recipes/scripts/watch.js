@@ -34,6 +34,7 @@ module.exports = function () {
 									 // multiple entry files
 		.pipe(gulpWebpack(
 			deepMerge(
+				config.options.webpack.defaults,
 				config.options.webpack.watch,
 				fonts.options.webpack.defaults,
 				fonts.options.webpack.watch,
@@ -42,8 +43,7 @@ module.exports = function () {
 				styles.options.webpack.defaults,
 				styles.options.webpack.watch,
 				svg.options.webpack.defaults,
-				svg.options.webpack.watch,
-				config.options.webpack.defaults
+				svg.options.webpack.watch
 			), null, function (err, stats) {
 				logStats(err, stats, { watch: true });
 

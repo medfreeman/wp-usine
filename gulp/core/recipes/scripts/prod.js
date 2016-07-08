@@ -29,6 +29,8 @@ module.exports = function () {
 									 // multiple entry files
 		.pipe(gulpWebpack(
 			deepMerge(
+				config.options.webpack.defaults,
+				config.options.webpack.prod,
 				fonts.options.webpack.defaults,
 				fonts.options.webpack.prod,
 				images.options.webpack.defaults,
@@ -36,9 +38,7 @@ module.exports = function () {
 				styles.options.webpack.defaults,
 				styles.options.webpack.prod,
 				svg.options.webpack.defaults,
-				svg.options.webpack.prod,
-				config.options.webpack.defaults,
-				config.options.webpack.prod
+				svg.options.webpack.prod
 			)
 		))
 
