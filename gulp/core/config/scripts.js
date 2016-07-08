@@ -17,17 +17,13 @@ var assets = require('./common').paths.assets;
  */
 module.exports = deepMerge({
 	paths: {
-		watch: [
-			assets.src + '/js/**/*.js'
-		],
+		watch: assets.src + '/js/**/*.js',
 		src: [
 			assets.src + '/js/*.js',
 			'!' + assets.src + '/js/**/_*'
 		],
 		dest: assets.dest,
-		clean: [
-			assets.dest + '/js/**/*.{js,map}'
-		]
+		clean: assets.dest + '/js/**/*.{js,map}'
 	},
 
 	options: {
