@@ -14,15 +14,34 @@ var assets = require('./common').paths.assets;
  */
 module.exports = deepMerge({
 	paths: {
-		watch: [
-			assets.src + '/img/**/*.{gif,ico,jpg,jpeg,png,webp}',
-			'!' + assets.src + '/img/sprites'
-		],
-		src:   [
-			assets.src + '/img/**/*.{gif,ico,jpg,jpeg,png,webp}',
-			'!' + assets.src + '/img/sprites'
-		],
-		dest:  assets.dest + '/img',
 		clean: assets.dest + '/img/**/*.{gif,ico,jpg,jpeg,png,webp}'
+	},
+
+	options: {
+		webpack: {
+			defaults: {
+				module: {
+					loaders: [
+						{
+							test: /\.(jpe?g|png|gif)$/i,
+							loader: 'file-loader?name=img/[name].[ext]!image-webpack'
+						},
+						{
+							test: /\.(ico|webp)$/i,
+							loader: 'file-loader?name=img/[name].[ext]'
+						}
+					]
+				},
+				imageWebpackLoader: {
+					bypassOnDebug: true,
+					optimizationLevel: 7,
+					interlaced: false,
+					pngquant: {
+						quality: '65-90',
+						speed: 4
+					}
+				}
+			},
+		}
 	}
 }, overrides);

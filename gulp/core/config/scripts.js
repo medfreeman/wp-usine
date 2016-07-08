@@ -17,13 +17,17 @@ var assets = require('./common').paths.assets;
  */
 module.exports = deepMerge({
 	paths: {
-		watch: assets.src + '/js/**/*.js',
+		watch: [
+			assets.src + '/js/**/*.js'
+		],
 		src: [
 			assets.src + '/js/*.js',
 			'!' + assets.src + '/js/**/_*'
 		],
-		dest: assets.dest + '/js',
-		clean: assets.dest + '/js/**/*.{js,map}'
+		dest: assets.dest,
+		clean: [
+			assets.dest + '/js/**/*.{js,map}'
+		]
 	},
 
 	options: {
@@ -42,9 +46,7 @@ module.exports = deepMerge({
 			// merged with defaults
 			// for :dev task
 			dev: {
-				devtool: 'eval'
 			},
-
 
 			// merged with defaults
 			// for :prod task
@@ -81,6 +83,7 @@ module.exports = deepMerge({
 					]
 				},
 				output: {
+					filename: 'js/[name].js',
 					chunkFilename: 'chunk-[name].js'
 				},
 				stats: {
@@ -96,7 +99,7 @@ module.exports = deepMerge({
 								/vendor/,
 								/polyfills/
 							],
-							loader: 'eslint'
+							loader: 'eslint!import-glob'
 						}
 					],
 					loaders: [

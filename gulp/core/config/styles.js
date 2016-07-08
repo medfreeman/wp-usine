@@ -1,6 +1,11 @@
 // utils
 var deepMerge = require('../utils/deepMerge');
 
+var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+var precss       = require('precss');
+var autoprefixer = require('autoprefixer');
+var cssnano      = require('cssnano');
+
 // config
 var overrides = require('../../config/styles');
 var assets = require('./common').paths.assets;
@@ -14,30 +19,79 @@ var assets = require('./common').paths.assets;
  */
 module.exports = deepMerge({
 	paths: {
-		watch: [
-			assets.src + '/scss/**/*.scss',
-			'!' + assets.src + '/scss/**/*_tmp\\d+.scss'
-		],
-		src:   [
-			assets.src + '/scss/*.scss',
-			'!' + assets.src + '/scss/**/_*'
-		],
-		dest:  assets.dest + '/css',
 		clean: assets.dest + '/css/**/*.{css,map}'
 	},
 
 	options: {
-		sass: {},
-		autoprefixer: {
-			browsers: [
-				'last 2 version',
-				'ie >= 9',
-				'IOS >= 7'
-			]
-		},
-		minify: {
-			autoprefixer: false,
-			discardComments: { removeAll: true }
+		webpack: {
+			watch: {
+				devtool: 'source-map',
+				module: {
+					loaders: [
+						{
+							test: /\.scss$/,
+							loader: ExtractTextWebpackPlugin.extract(
+								'style-loader',
+								'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap',
+								{ publicPath: '../' }
+							)
+						},
+						{
+							test: /\.css$/,
+							loader: ExtractTextWebpackPlugin.extract(
+								'style-loader',
+								'css-loader?sourceMap!postcss-loader',
+								{ publicPath: '../' }
+							)
+						}
+					]
+				}
+			},
+
+			prod: {
+				module: {
+					loaders: [
+						{
+							test: /\.scss$/,
+							loader: ExtractTextWebpackPlugin.extract(
+								'style-loader',
+								'css-loader!postcss-loader!sass-loader',
+								{ publicPath: '../' }
+							)
+						},
+						{
+							test: /\.css$/,
+							loader: ExtractTextWebpackPlugin.extract(
+								'style-loader',
+								'css-loader!postcss-loader',
+								{ publicPath: '../' }
+							)
+						}
+					]
+				},
+				postcss: [
+					cssnano({
+						autoprefixer: false,
+						discardComments: { removeAll: true }
+					})
+				]
+			},
+			defaults: {
+				plugins: [
+					new ExtractTextWebpackPlugin('css/main.css')
+				],
+				sassLoader: {},
+				postcss: [
+					precss,
+					autoprefixer({
+						browsers: [
+							'last 2 version',
+							'ie >= 9',
+							'IOS >= 7'
+						]
+					})
+				]
+			},
 		}
 	}
 }, overrides);

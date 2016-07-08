@@ -14,15 +14,6 @@ var assets = require('./common').paths.assets;
  */
 module.exports = deepMerge({
 	paths: {
-		watch: [
-			assets.src + '/svg/**/*.svg',
-			'!' + assets.src + '/svg/sprite/**/*.svg'
-		],
-		src: [
-			assets.src + '/svg/**/*.svg',
-			'!' + assets.src + '/svg/sprite/**/*.svg'
-		],
-		dest: assets.dest + '/svg',
 		clean: [
 			assets.dest + '/svg/**/*.svg',
 			'!' + assets.dest + '/svg/sprite-*.svg'
@@ -30,7 +21,31 @@ module.exports = deepMerge({
 	},
 
 	options: {
-		svgmin: {multipass: true}
+		webpack: {
+			defaults: {
+				module: {
+					loaders: [
+						{
+							test: /\.svg$/i,
+							include: /\/svg\/.*/,
+							loader: 'file-loader?name=svg/[name].[ext]!image-webpack'
+						}
+					]
+				},
+				imageWebpackLoader: {
+					svgo: {
+						plugins: [
+							{
+								removeViewBox: false
+							},
+							{
+								removeEmptyAttrs: false
+							}
+						]
+					}
+				}
+			},
+		}
 	}
 
 }, overrides);
