@@ -5,6 +5,9 @@
  *
  */
 import './vendor/webpack.publicPath';
+/* Bootstrap */
+import 'bootstrap-webpack!./vendor/bootstrap.config.js';
+
 /* eslint no-extra-semi: 0 */
 /**
  * Import
