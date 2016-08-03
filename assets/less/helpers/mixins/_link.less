@@ -1,0 +1,55 @@
+/* =========================================
+		Link
+   ========================================= */
+
+.link-text-decoration(@default, @hover, @active, @visited, @focus)
+{
+	text-decoration: @default;
+	&:hover
+	{
+		text-decoration: @hover;
+	}
+	&:active
+	{
+		text-decoration: @active;
+	}
+	&:visited
+	{
+		text-decoration: @visited;
+	}
+	&:focus
+	{
+		text-decoration: @visited;
+	}
+}
+
+.link-text-decoration(@all)
+{
+	.link-text-decoration(@all, @all, @all, @all, @all);
+}
+
+.link-color(@default, @hover, @active, @visited, @focus)
+{
+	color: @default;
+	&:hover
+	{
+		color: @hover;
+	}
+	&:active
+	{
+		color: @active;
+	}
+	&:visited
+	{
+		color: @visited;
+	}
+	&:focus
+	{
+		color: @visited;
+	}
+}
+
+.link-color(@all)
+{
+	.link-color(@all, @all, @all, @all, @all);
+}

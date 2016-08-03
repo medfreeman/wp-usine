@@ -1,0 +1,25 @@
+/* =========================================
+		Alignment
+   ========================================= */
+
+ /**
+ * Vertical alignment for twitter bootstrap columns
+ */
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.vertical-align-cols {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.vertical-align-cols > [class^="col-"],
+	.vertical-align-cols > [class*=" col-"] {
+		display: flex;
+	}
+
+	.vertical-align-cols.center > [class^="col-"],
+	.vertical-align-cols.center > [class*=" col-"] {
+		align-items: center;     /* Align the flex-items vertically */
+	}
+}

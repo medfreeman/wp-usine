@@ -1,0 +1,25 @@
+/* =========================================
+		Widgets
+   ========================================= */
+
+.widget__header {
+	margin: 0;
+	.font-size-relative(@widget__header-font-size);
+}
+
+/**
+ * Simple Links widget
+ */
+
+.widget_link_list ul {
+	.margin-relative(@widget-title-vertical-space, 0, 0, 0);
+	padding: 0;
+}
+
+.widget_link_list li {
+	list-style-type: none;
+}
+
+.widget_link_list a {
+	@link-text-decoration-none();
+}

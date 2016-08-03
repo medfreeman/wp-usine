@@ -1,0 +1,23 @@
+/* =========================================
+		Post content
+   ========================================= */
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.content__container {
+		.padding-relative(0, @center-column-right-padding, 0, @center-column-left-padding);
+	}
+}
+
+.post_content a {
+	@link-text-decoration-none();
+}
+
+.post_content p {
+	margin-top: 0;
+}
+
+article.type-page.two-columns .post_content {
+	column-count: 2;
+	.column-gap-relative(20);
+}

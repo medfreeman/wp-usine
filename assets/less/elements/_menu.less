@@ -1,0 +1,134 @@
+/* =========================================
+		Menus
+   ========================================= */
+
+/**
+ * All Menus
+ */
+.menu__list {
+	margin: 0;
+	padding: 0;
+}
+
+.menu__item {
+	list-style-type: none;
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.menu__link {
+	@link-text-decoration-none();
+}
+
+/**
+ * Primary Menu
+ */
+.menu--primary {
+	font-family: @menu--primary-font-face;
+	text-align: center;
+	.padding-relative(0, 0, 0, @center-column-left-padding);
+}
+
+.menu--primary .menu__link {
+	.link-color(@menu--primary-color);
+	.font-size-relative(@menu--primary-font-size);
+	.line-height-relative(@menu--primary-line-height);
+	box-decoration-break: clone;
+}
+
+.menu--primary .menu__subtitle {
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	text-align: left;
+	.top-relative(@menu--primary__subtitle-margin-top);
+	.font-size-relative(@menu--primary__subtitle-font-size);
+	.line-height-relative(@menu--primary__subtitle-line-height);
+	width: 100%;
+	transition: opacity .4s ease-in;
+	display: none;
+}
+
+.menu--primary .menu__link:hover + .menu__subtitle {
+	opacity: 1;
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.menu--primary .menu__list {
+		text-align: left;
+	}
+	.menu--primary .menu__item {
+		display: inline-block;
+	}
+	.menu--primary .menu__link {
+		.padding-relative(@menu--primary-link-padding-t, @menu--primary-link-padding-r, @menu--primary-link-padding-b, @menu--primary-link-padding-l);
+	}
+	.menu--primary .menu__subtitle {
+		display: inline;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+	.menu--primary .menu__link {
+		.font-size-relative(@menu--primary-font-size-lg);
+		.line-height-relative(@menu--primary-line-height-lg);
+	}
+
+	.menu--primary .menu__subtitle {
+		.font-size-relative(@menu--primary__subtitle-font-size-lg);
+		.line-height-relative(@menu--primary__subtitle-line-height-lg);
+	}
+}
+
+/**
+ * Left Menu
+ */
+
+.menu--left {
+	font-family: @menu--left-font-face;
+	text-align: left;
+}
+
+.menu--left .menu__item {
+	.font-size-relative(@menu--left-font-size);
+	.line-height-relative(@menu--left-line-height);
+	.padding-relative(@menu--left-link-padding-v, @menu--left-link-padding-h);
+	width: 100%;
+}
+
+.menu--left .menu__link {
+	.link-color(@menu--left-color);
+	box-decoration-break: clone;
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.menu--left {
+		width: 100%;
+		// .padding-relative(15, 0, 0, 0);
+	}
+
+	.menu--left .menu__list {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		.top-relative(@widget__header-font-size + @widget-title-vertical-space);
+		bottom: 0;
+	}
+
+	.menu--left .menu__item {
+		display: block;
+		flex: 1;
+		width: 220%!important;
+		transition: font-size .3s ease-in, height .3s ease-in, font-weight .3s ease-in, height .3s ease-in;
+	}
+
+	.menu--left .menu__item:hover {
+		.font-size-relative(@menu--left-font-size-grow);
+		font-weight: bold;
+	}
+}

@@ -1,0 +1,37 @@
+/* =========================================
+		Wrappers
+   ========================================= */
+
+.wrapper--header {
+	background-color: @wrapper--header-background-color;
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.wrapper--header {
+		position: fixed;
+		width: 100%;
+		.padding-relative(@header-padding-v, @header-padding-h);
+		z-index: 9999;
+	}
+
+	.wrapper--left {
+		position: fixed;
+		top: unit(@second-row-top, px);
+		.padding-top-relative(@second-row-padding-top);
+		bottom: 0;
+	}
+
+	.wrapper--content {
+		top: unit(@second-row-top, px);
+		.padding-top-relative(@second-row-padding-top);
+	}
+
+	.wrapper--right {
+		position: fixed;
+		top: unit(@second-row-top, px);
+		.padding-top-relative(@second-row-padding-top);
+		bottom: 0;
+		right: 0;
+	}
+}
