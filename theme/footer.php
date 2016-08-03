@@ -6,7 +6,15 @@
  */
 ?>
 
-
+				</div>
+			</div>
+			<div class="col-md-2 wrapper--right">
+				<div class="widgetbar--right__container">
+					<?php MInc_Utils::sidebar( 'right' ); ?>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php // common footer content goes here ?>
 
 
