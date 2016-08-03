@@ -1,7 +1,7 @@
 module.exports = {
 	styleLoader: require('extract-text-webpack-plugin').extract('style-loader', 'css-loader!postcss-loader!less-loader'),
 	scripts: {
-		'dropdown': true
+		"dropdown": true
 	},
 	styles: {
 		"mixins": true,
