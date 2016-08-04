@@ -76,8 +76,10 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 
 				<div id="comment-content-<?php comment_ID(); ?>" class="comment__content">
 					<?php if ( ! $comment->comment_approved ) : ?>
-					<em class="comment__message comment-awaiting-moderation">Your comment is awaiting moderation.</em>
-					
+					<em class="comment__message comment-awaiting-moderation">
+						<?php esc_html_e( __( 'Votre message est en attente de modération.', USINE_TEXTDOMAIN ) ); ?>
+					</em>
+
 					<?php else : comment_text(); ?>
 					<?php endif; ?>
 				</div><!-- /.comment-content -->
