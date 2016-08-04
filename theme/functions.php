@@ -91,7 +91,7 @@ if ( ! function_exists( 'usine_setup' ) ) {
 
 		// Let wp know we want to use post thumbnails
 		add_theme_support( 'post-thumbnails', array( 'page', 'vox' ) );
-		
+
 		// Add Custom Logo Support.
 		/*
 		add_theme_support( 'custom-logo', array(
