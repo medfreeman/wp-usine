@@ -1,0 +1,64 @@
+.border(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE, @top-size: 5px, @right-size: 5px, @bottom-size: 5px, @left-size: 5px) {
+	border-top: solid @top-size @top-color;
+	border-left: solid @left-size @left-color;
+	border-right: solid @right-size @right-color;
+	border-bottom: solid @bottom-size @bottom-color;
+}
+
+.border(@color: #EEE, @top-size: 5px, @right-size: 5px, @bottom-size: 5px, @left-size: 5px) {
+	.border(@color,@color,@color,@color,@top-size,@right-size,@bottom-size,@left-size);
+}
+
+.border(@color: #EEE, @thickness: 5px) {
+	.border(@color,@color,@color,@color,@thickness,@thickness,@thickness,@thickness);
+}
+
+.box-shadow(@shadows) {
+	-webkit-box-shadow: @shadows;
+	-moz-box-shadow: @shadows;
+	-o-box-shadow: @shadows;
+	box-shadow: @shadows;
+}
+
+.shadow-border(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE, @top-thickness: 5px, @right-thickness: 5px, @bottom-thickness: 5px, @left-thickness: 5px, @top-color_2: #EEE, @right-color_2: #EEE, @bottom-color_2: #EEE, @left-color_2: #EEE, @top-thickness_2: 5px, @right-thickness_2: 5px, @bottom-thickness_2: 5px, @left-thickness_2: 5px) {
+	.box-shadow(				
+											-(@left-thickness) 0px 0px 0px @left-color,
+											@right-thickness 0px 0px 0px @right-color,
+											0px -(@top-thickness) 0px 0px @top-color,
+											0px @bottom-thickness 0px 0px @bottom-color,
+											-(@left-thickness_2) 0px 0px 0px @left-color_2,
+											@right-thickness_2 0px 0px 0px @right-color_2,
+											0px -(@top-thickness_2) 0px 0px @top-color_2,
+											0px @bottom-thickness_2 0px 0px @bottom-color_2;
+							);
+}
+
+.shadow-border(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE, @top-thickness: 5px, @right-thickness: 5px, @bottom-thickness: 5px, @left-thickness: 5px) {
+	.box-shadow(				
+											-(@left-thickness) 0px 0px 0px @left-color,
+											@right-thickness 0px 0px 0px @right-color,
+											0px -(@top-thickness) 0px 0px @top-color,
+											0px @bottom-thickness 0px 0px @bottom-color;
+							);
+}
+
+.shadow-border(@color: #EEE, @top-thickness: 5px, @right-thickness: 5px, @bottom-thickness: 5px, @left-thickness: 5px, @color_2: #EEE, @top-thickness_2: 5px, @right-thickness_2: 5px, @bottom-thickness_2: 5px, @left-thickness_2: 5px) {
+		.box-shadow(				
+											-(@left-thickness) 0px 0px 0px @color,
+											@right-thickness 0px 0px 0px @color,
+											0px -(@top-thickness) 0px 0px @color,
+											0px @bottom-thickness 0px 0px @color,
+											-(@left-thickness_2) 0px 0px 0px @color_2,
+											@right-thickness_2 0px 0px 0px @color_2,
+											0px -(@top-thickness_2) 0px 0px @color_2,
+											0px @bottom-thickness_2 0px 0px @color_2;
+							);
+}
+
+.shadow-border(@color: #EEE, @top-thickness: 5px, @right-thickness: 5px, @bottom-thickness: 5px, @left-thickness: 5px) {
+	.shadow-border(@color, @color, @color, @color, @top-thickness, @right-thickness, @bottom-thickness, @left-thickness);
+}
+
+.shadow-border(@color: #EEE, @thickness: 5px) {
+	.shadow-border(@color, @color, @color, @color, @thickness, @thickness, @thickness, @thickness);
+}

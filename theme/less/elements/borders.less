@@ -1,0 +1,25 @@
+body {
+	.border(@borders__color_outside, 10px);
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	body {
+		.border(@borders__color_outside, 0);
+	}
+
+	.wrapper--header {
+		.border(@borders__color_outside, 10px, 0, 0, 0);
+		.shadow-border(@borders__color_inside, 0, 0, 5px, 0, @borders__color_outside, 0, 0, 10px, 0);
+	}
+	
+	.wrapper--left {
+		.border(@borders__color_outside, 0, 0, 0, 10px);
+		.shadow-border(@borders__color_inside, 0, 5px, 0, 0, @borders__color_outside, 0, 10px, 0, 0);
+	}
+	
+	.wrapper--right {
+		.border(@borders__color_outside, 0, 10px, 0, 0);
+		.shadow-border(@borders__color_inside, 0, 0, 0, 5px, @borders__color_outside, 0, 0, 0, 10px);
+	}
+}

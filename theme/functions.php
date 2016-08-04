@@ -6,6 +6,38 @@
  */
 
 const USINE_TEXTDOMAIN = 'usine';
+const USINE_THEME_SECTION_COLORS = 'colors';
+const USINE_THEME_SECTION_VOX = 'vox';
+const USINE_THEME_MOD_BORDERS_COLOR_OUTSIDE          = 'color_border_outside';
+const USINE_THEME_MOD_BORDERS_COLOR_INSIDE           = 'color_border_inside';
+const USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND       = 'color_button_background';
+const USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND_HOVER = 'color_button_hover_background';
+const USINE_THEME_MOD_VOX_COLOR_BACKGROUND           = 'color_vox_background';
+const USINE_THEME_MOD_LINK_COLOR                     = 'color_link';
+const USINE_THEME_MOD_LINK_COLOR_HOVER               = 'color_link_hover';
+const USINE_THEME_MOD_VOX_PAGE                       = 'vox_page';
+const USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR        = 'color_primary_menu_link';
+const USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR_HOVER  = 'color_primary_menu_link_hover';
+const USINE_THEME_MODS = array(
+	USINE_THEME_MOD_BORDERS_COLOR_OUTSIDE         => '@borders__color_outside',
+	USINE_THEME_MOD_BORDERS_COLOR_INSIDE          => '@borders__color_inside',
+	USINE_THEME_MOD_VOX_COLOR_BACKGROUND          => '@vox__color_background',
+	USINE_THEME_MOD_LINK_COLOR                    => '@link__color',
+	USINE_THEME_MOD_LINK_COLOR_HOVER              => '@link__color_hover',
+	USINE_THEME_MOD_VOX_PAGE                      => '@vox__page',
+	USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR       => '@menu--primary__link_color',
+	USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR_HOVER => '@menu--primary__link_color_hover',
+);
+
+require_once 'tgmpa/class-tgm-plugin-activation.php';
+
+if ( class_exists( 'WPLessPlugin' ) ) {
+	$less = WPLessPlugin::getInstance();
+
+	foreach ( USINE_THEME_MODS as $setting_name => $less_variable ) {
+		$less->addVariable( $less_variable, get_theme_mod( $setting_name ) );
+	}
+}
 
 /* =========================================
 		ACTION HOOKS & FILTERS
@@ -22,6 +54,10 @@ add_action( 'wp_enqueue_scripts', 'usine_scripts' );
 // expose php variables to js. just uncomment line
 // below and see function theme_scripts_localize
 // add_action( 'wp_enqueue_scripts', 'theme_scripts_localize', 20 );
+
+add_action( 'customize_register', 'usine_customize_register' );
+
+add_action( 'customize_preview_init', 'usine_customize_preview' );
 
 /**--- Filters ---**/
 
@@ -99,6 +135,7 @@ if ( ! function_exists( 'usine_styles' ) ) {
 		$theme_dir = get_stylesheet_directory_uri();
 
 		wp_enqueue_style( 'main', "$theme_dir/assets/css/main.css", array(), null, 'all' );
+		wp_enqueue_style( 'custom', "$theme_dir/less/colors.less", array(), null, 'all' );
 	}
 }
 
@@ -133,5 +170,159 @@ if ( ! function_exists( 'usine_scripts_localize' ) ) {
 			'theme' => get_stylesheet_directory_uri(),
 			'ajax'  => add_query_arg( $ajax_url_params, admin_url( 'admin-ajax.php' ) ),
 		) );
+	}
+}
+
+if ( ! function_exists( 'usine_customize_register' ) ) {
+	function usine_customize_register( $wp_customize ) {
+		$wp_customize->add_section( USINE_THEME_SECTION_COLORS, array(
+			'title' => __( 'Couleurs', USINE_TEXTDOMAIN ),
+			'description' => __( 'Personnalisez les couleurs du thème.', USINE_TEXTDOMAIN ),
+			'priority' => 30,
+			'capability' => 'edit_theme_options',
+		) );
+
+		$wp_customize->add_section( USINE_THEME_SECTION_VOX, array(
+			'title' => __( 'Page des vox', USINE_TEXTDOMAIN ),
+			'description' => __( 'Choisissez la page dont le contenu s\'affichera au-dessus des vox.', USINE_TEXTDOMAIN ),
+			'priority' => 200,
+			'capability' => 'edit_theme_options',
+		) );
+
+		/* Colors section */
+		$wp_customize->add_setting( USINE_THEME_MOD_BORDERS_COLOR_OUTSIDE, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#105b9b',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BORDERS_COLOR_OUTSIDE, array(
+			'label' => __( 'Couleur des bordures extérieures', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_BORDERS_COLOR_INSIDE, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#000000',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BORDERS_COLOR_INSIDE, array(
+			'label' => __( 'Couleur des bordures intérieures', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#2ba6cb',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND, array(
+			'label' => __( 'Couleur de fond des boutons', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND_HOVER, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#2284a1',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND_HOVER, array(
+			'label' => __( 'Couleur de fond des boutons survolés', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_VOX_COLOR_BACKGROUND, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#105b9b',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_VOX_COLOR_BACKGROUND, array(
+			'label' => __( 'Couleur de l\'icone du vox', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_LINK_COLOR, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#2ba6cb',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_LINK_COLOR, array(
+			'label' => __( 'Couleur des liens', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_LINK_COLOR_HOVER, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#2795b6',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_LINK_COLOR_HOVER, array(
+			'label' => __( 'Couleur des liens survolés', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#000000',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR, array(
+			'label' => __( 'Couleur des liens du menu principal', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		$wp_customize->add_setting( USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR_HOVER, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => '#105b9b',
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR_HOVER, array(
+			'label' => __( 'Couleur des liens survolés du menu principal', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_COLORS,
+		) ) );
+
+		/* Vox section */
+		$wp_customize->add_setting( USINE_THEME_MOD_VOX_PAGE, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => 0,
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( USINE_THEME_MOD_VOX_PAGE, array(
+			'type' => 'dropdown-pages',
+			'label' => __( 'Page des vox', USINE_TEXTDOMAIN ),
+			'section' => USINE_THEME_SECTION_VOX,
+		) );
+	}
+}
+
+if ( ! function_exists( 'usine_customize_preview' ) ) {
+	function usine_customize_preview( $wp_customize ) {
+		if ( class_exists( 'WPLessPlugin' ) ) {
+
+			$less = WPLessPlugin::getInstance();
+
+			foreach ( USINE_THEME_MODS as $setting_name => $less_variable ) {
+				$less->addVariable( $less_variable, $wp_customize->get_setting( $setting_name )->value() );
+			}
+		}
 	}
 }
