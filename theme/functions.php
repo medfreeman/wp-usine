@@ -71,6 +71,8 @@ add_filter( 'comment_form_default_fields', 'usine_disable_comment_fields' );
 
 add_filter( 'pre_get_document_title', 'usine_page_title' );
 
+add_filter( 'document_title_separator', 'usine_page_title_separator' );
+
 /* =========================================
 		HOOKED Functions
    ========================================= */
@@ -483,6 +485,18 @@ if ( ! function_exists( 'usine_page_title' ) ) {
 			$title = get_bloginfo( 'title' ) . ' | ' . get_bloginfo( 'description' );
 		}
 		return $title;
+	}
+}
+
+/**
+ * Customize the page title separator.
+ *
+ * @param string $title The original separator.
+ * @return string The separator to use.
+ */
+if ( ! function_exists( 'usine_page_title_separator' ) ) {
+	function usine_page_title_separator() {
+		return '|';
 	}
 }
 
