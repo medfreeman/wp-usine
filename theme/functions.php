@@ -142,6 +142,7 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 				'name'      => 'Vox Usini',
 				'slug'      => 'wp-voxusini',
 				'source'    => 'https://github.com/medfreeman/wp-voxusini/archive/master.zip',
+				'required'  => true,
 			),
 
 		);
