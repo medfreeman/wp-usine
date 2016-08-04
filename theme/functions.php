@@ -134,6 +134,16 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 				'slug'      => 'wp-less',
 				'required'  => true,
 			),
+
+			// This is an example of how to include a plugin from a GitHub repository in your theme.
+			// This presumes that the plugin code is based in the root of the GitHub repository
+			// and not in a subdirectory ('/src') of the repository.
+			array(
+				'name'      => 'Vox Usini',
+				'slug'      => 'wp-voxusini',
+				'source'    => 'https://github.com/medfreeman/wp-voxusini/archive/master.zip',
+			),
+
 		);
 
 		$config = array(
