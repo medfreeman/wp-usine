@@ -534,3 +534,19 @@ if ( ! function_exists( 'usine_disable_comment_fields' ) ) {
 		return $fields;
 	}
 }
+
+/**
+ * Customize the page title.
+ *
+ * @param string $title The original title.
+ * @return string The title to use.
+ */
+if ( ! function_exists( 'usine_page_title' ) ) {
+	function usine_page_title( $title ) {
+		global $usine_front_page;
+		if ( $usine_front_page ) {
+			$title = get_bloginfo( 'title' ) . ' | ' . get_bloginfo( 'description' );
+		}
+		return $title;
+	}
+}
