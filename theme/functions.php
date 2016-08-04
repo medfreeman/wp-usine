@@ -443,6 +443,49 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 	}
 }
 
+if ( ! function_exists( 'usine_validate_comment_author' ) ) {
+	function usine_validate_comment_author() {
+		if ( empty( sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) ) ) { // input var ok. // WPCS: CSRF ok.
+			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un nom.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
+		} else if ( empty( sanitize_text_field( wp_unslash( $_POST['comment'] ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['comment'] ) ) ) ) ) ) { // input var ok. // WPCS: CSRF ok.
+			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un message.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
+		}
+	}
+}
+
+if ( ! function_exists( 'usine_disable_comment_fields' ) ) {
+	function usine_disable_comment_fields( $fields ) {
+		$commenter = wp_get_current_commenter();
+		$req = get_option( 'require_name_email' );
+		$aria_req = ( $req ? " aria-required='true'" : '' );
+
+		$fields['author'] = '<p class="comment-form-author"><label for="author">' . __( 'Nom', USINE_TEXTDOMAIN ) . ' ' . __( '(entrez également votre organisation, fonction.. si vous le souhaitez)', USINE_TEXTDOMAIN ) . '</label> ' .
+			( $req ? '<span class="required">*</span>' : '' ) .
+			'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
+			'" size="30"' . $aria_req . ' /></p>';
+
+		unset( $fields['email'] );
+		unset( $fields['url'] );
+		return $fields;
+	}
+}
+
+/**
+ * Customize the page title.
+ *
+ * @param string $title The original title.
+ * @return string The title to use.
+ */
+if ( ! function_exists( 'usine_page_title' ) ) {
+	function usine_page_title( $title ) {
+		global $usine_front_page;
+		if ( $usine_front_page ) {
+			$title = get_bloginfo( 'title' ) . ' | ' . get_bloginfo( 'description' );
+		}
+		return $title;
+	}
+}
+
 if ( ! function_exists( 'usine_pagination' ) ) {
 
 	function usine_pagination( $before = '', $after = '' ) {
@@ -505,48 +548,5 @@ if ( ! function_exists( 'usine_pagination' ) ) {
 			echo '<li class="pagination__item last"><a class="pagination__link" href="' . esc_url( get_pagenum_link( $max_page ) ) . '" title="Last">' . esc_html( '&raquo;' ) . '</a></li>';
 		}
 		echo '</ul>' . esc_html( $after ) . '';
-	}
-}
-
-if ( ! function_exists( 'usine_validate_comment_author' ) ) {
-	function usine_validate_comment_author() {
-		if ( empty( sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) ) ) { // input var ok. // WPCS: CSRF ok.
-			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un nom.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
-		} else if ( empty( sanitize_text_field( wp_unslash( $_POST['comment'] ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['comment'] ) ) ) ) ) ) { // input var ok. // WPCS: CSRF ok.
-			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un message.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
-		}
-	}
-}
-
-if ( ! function_exists( 'usine_disable_comment_fields' ) ) {
-	function usine_disable_comment_fields( $fields ) {
-		$commenter = wp_get_current_commenter();
-		$req = get_option( 'require_name_email' );
-		$aria_req = ( $req ? " aria-required='true'" : '' );
-
-		$fields['author'] = '<p class="comment-form-author"><label for="author">' . __( 'Nom', USINE_TEXTDOMAIN ) . ' ' . __( '(entrez également votre organisation, fonction.. si vous le souhaitez)', USINE_TEXTDOMAIN ) . '</label> ' .
-			( $req ? '<span class="required">*</span>' : '' ) .
-			'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
-			'" size="30"' . $aria_req . ' /></p>';
-
-		unset( $fields['email'] );
-		unset( $fields['url'] );
-		return $fields;
-	}
-}
-
-/**
- * Customize the page title.
- *
- * @param string $title The original title.
- * @return string The title to use.
- */
-if ( ! function_exists( 'usine_page_title' ) ) {
-	function usine_page_title( $title ) {
-		global $usine_front_page;
-		if ( $usine_front_page ) {
-			$title = get_bloginfo( 'title' ) . ' | ' . get_bloginfo( 'description' );
-		}
-		return $title;
 	}
 }
