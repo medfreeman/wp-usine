@@ -96,6 +96,9 @@ if ( ! function_exists( 'usine_setup' ) ) {
 		// Let wp know we want to use post thumbnails
 		add_theme_support( 'post-thumbnails', array( 'page', 'vox' ) );
 
+		// Add WP 4.1 title tag support
+		add_theme_support( 'title-tag' );
+
 		// Add Custom Logo Support.
 		/*
 		add_theme_support( 'custom-logo', array(
