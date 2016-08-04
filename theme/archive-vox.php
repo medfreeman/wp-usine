@@ -1,7 +1,9 @@
 <?php get_header(); ?>
 
 	<?php
+	if ( function_exists( 'vox_is_paged' ) && ! vox_is_paged() ) { // Show content only in first page
 		get_template_part( 'elements/content', 'vox' );
+	}
 	?>
 
 	<?php if ( have_posts() ) : ?>
