@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "gulp",
     "prod": "gulp build",
+    "postinstall": "npm run bower -- install",
     "bower": "bower"
   },
   "engines": {
