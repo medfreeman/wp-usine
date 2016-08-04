@@ -436,3 +436,67 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 	}
 }
 
+if ( ! function_exists( 'usine_pagination' ) ) {
+
+	function usine_pagination( $before = '', $after = '' ) {
+		global $wp_query;
+
+		$paged = isset( $wp_query->query_vars['paged'] ) ? absint( $wp_query->query_vars['paged'] ) : 1;
+
+		$max_page = isset( $wp_query->query_vars['max_num_pages'] ) ? absint( $wp_query->query_vars['max_num_pages'] ) : 1;
+		if ( 1 === $max_page ) {
+			return;
+		}
+
+		$pages_to_show = 7;
+		$pages_to_show_minus_1 = $pages_to_show - 1;
+		$half_page_start = floor( $pages_to_show_minus_1 / 2 );
+		$half_page_end = ceil( $pages_to_show_minus_1 / 2 );
+		$start_page = $paged - $half_page_start;
+		if ( $start_page <= 0 ) {
+			$start_page = 1;
+		}
+		$end_page = $paged + $half_page_end;
+		if ( ( $end_page - $start_page ) !== $pages_to_show_minus_1 ) {
+			$end_page = $start_page + $pages_to_show_minus_1;
+		}
+		if ( $end_page > $max_page ) {
+			$start_page = $max_page - $pages_to_show_minus_1;
+			$end_page = $max_page;
+		}
+		if ( $start_page <= 0 ) {
+			$start_page = 1;
+		}
+
+		echo esc_html( $before ) . '<ul class="pagination--bla pagination__list clearfix">';
+
+		if ( $start_page > 1 ) {
+			echo '<li class="pagination__item first"><a class="pagination__link" href="' . esc_url( get_pagenum_link( 1 ) ) . '" title="First">' . esc_html( '&laquo;' ) . '</a></li>';
+		}
+
+		if ( $paged > 1 ) {
+			echo '<li class="pagination__item previous">';
+			echo wp_kses( get_previous_posts_link( '&lsaquo;' ), array( 'a' => array( 'href' => array() ) ) );
+			echo '</li>';
+		}
+
+		for ( $i = $start_page; $i <= $end_page; $i++ ) {
+			if ( $i === $paged ) {
+				echo '<li class="pagination__item current">' . esc_html( $i ) . '</li>';
+			} else {
+				echo '<li class="pagination__item"><a class="pagination__link" href="' . esc_url( get_pagenum_link( $i ) ) . '">' . esc_html( $i ) . '</a></li>';
+			}
+		}
+
+		if ( $paged < $max_page ) {
+			echo '<li class="pagination__item next">';
+			echo wp_kses( get_next_posts_link( '&rsaquo;' ), array( 'a' => array( 'href' => array() ) ) );
+			echo '</li>';
+		}
+
+		if ( $end_page < $max_page ) {
+			echo '<li class="pagination__item last"><a class="pagination__link" href="' . esc_url( get_pagenum_link( $max_page ) ) . '" title="Last">' . esc_html( '&raquo;' ) . '</a></li>';
+		}
+		echo '</ul>' . esc_html( $after ) . '';
+	}
+}
