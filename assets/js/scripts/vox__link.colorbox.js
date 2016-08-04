@@ -2,7 +2,7 @@
 import 'jquery-colorbox';
 import 'jquery-colorbox/i18n/jquery.colorbox-fr.js';
 import 'jquery-colorbox/example4/colorbox.css';
-import enquire from 'exports?enquire!enquire';
+import enquire from 'enquire';
 
 $(() => {
 	// Executes in MD and LG breakpoints
