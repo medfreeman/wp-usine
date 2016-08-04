@@ -40,5 +40,7 @@ import 'glob:../svg/**/*.svg!../svg/sprite/**/*.svg';
  */
 // home link click event
 import './scripts/link__location.js';
+// radio listen button
+import './scripts/radio__listen.js';
 // vox colorbox
 import './scripts/vox__link.colorbox.js';
