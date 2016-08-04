@@ -61,6 +61,8 @@ add_action( 'customize_register', 'usine_customize_register' );
 
 add_action( 'customize_preview_init', 'usine_customize_preview' );
 
+add_action( 'pre_get_posts', 'usine_bla_front_page' );
+
 /**--- Filters ---**/
 
 
@@ -138,6 +140,12 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 			// This is an example of how to include a plugin from a GitHub repository in your theme.
 			// This presumes that the plugin code is based in the root of the GitHub repository
 			// and not in a subdirectory ('/src') of the repository.
+			array(
+				'name'      => 'Bla',
+				'slug'      => 'wp-bla',
+				'source'    => 'https://github.com/medfreeman/wp-bla/archive/master.zip',
+				'required'  => true,
+			),
 			array(
 				'name'      => 'Vox Usini',
 				'slug'      => 'wp-voxusini',
@@ -373,3 +381,58 @@ if ( ! function_exists( 'usine_customize_preview' ) ) {
 		}
 	}
 }
+
+/**
+ * Load custom post type archive on home page
+ *
+ * Reference: http://www.wpaustralia.org/wordpress-forums/topic/pre_get_posts-and-is_front_page/
+ * Reference: http://wordpress.stackexchange.com/questions/30851/how-to-use-a-custom-post-type-archive-as-front-page
+ */
+if ( ! function_exists( 'usine_bla_front_page' ) ) {
+	function usine_bla_front_page( $query ) {
+		global $usine_front_page;
+		// Only filter the main query on the front-end
+		if ( is_admin() || ! $query->is_main_query() ) {
+			return;
+		}
+
+		global $wp;
+		$usine_front_page = false;
+
+		// If the latest posts are showing on the home page
+		if ( ( is_home() && empty( $wp->query_string ) ) ) {
+			$usine_front_page = true;
+		}
+
+		// If a static page is set as the home page
+		if ( ( $query->get( 'page_id' ) === get_option( 'page_on_front' ) && get_option( 'page_on_front' ) ) || empty( $wp->query_string ) ) {
+			$usine_front_page = true;
+		}
+
+		if ( $usine_front_page ) :
+
+			$paged = absint( $query->get( 'page' ) );
+			$paged = $paged ? $paged : 1;
+
+			$query->set( 'paged', $paged );
+
+			$posts_per_page = get_option( 'posts_per_page' );
+			if ( -1 !== $posts_per_page ) {
+				$query->set( 'posts_per_page', $posts_per_page );
+				$count_posts = wp_count_posts( 'bla' )->publish;
+				$query->set( 'max_num_pages', ceil( $count_posts / $posts_per_page ) );
+			}
+
+			$query->set( 'post_type', 'bla' );
+			$query->set( 'page_id', '' );
+
+			// Set properties to match an archive
+			$query->is_page = 0;
+			$query->is_singular = 0;
+			$query->is_post_type_archive = 1;
+			$query->is_archive = 1;
+
+		endif;
+	}
+}
+
