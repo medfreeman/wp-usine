@@ -38,5 +38,7 @@ import 'glob:../svg/**/*.svg!../svg/sprite/**/*.svg';
  * Your theme's js starts
  * here...
  */
+// home link click event
+import './scripts/link__location.js';
 // vox colorbox
 import './scripts/vox__link.colorbox.js';
