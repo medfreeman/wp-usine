@@ -12,11 +12,13 @@ module.exports = {
 			defaults: {
 				plugins: [
 					new webpack.ProvidePlugin({
-						'$': 'jquery'
+						'$': 'jquery',
+						'IASCallbacks': 'exports?IASCallbacks!jquery-ias/src/callbacks'
 					})
 				],
 				externals: {
 					jquery: 'window.jQuery',
+					urls: 'window.urls',
 					vox: 'window.vox'
 				}
 			}

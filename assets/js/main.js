@@ -44,3 +44,5 @@ import './scripts/link__location.js';
 import './scripts/radio__listen.js';
 // vox colorbox
 import './scripts/vox__link.colorbox.js';
+// infinite scroll
+import './scripts/infinite-scroll.js';

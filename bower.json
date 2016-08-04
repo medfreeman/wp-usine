@@ -17,6 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "enquire": "^2.1.2"
+    "enquire": "^2.1.2",
+    "spin.js": "^2.3.2",
+    "jquery-ias": "^2.2.1"
   }
 }
