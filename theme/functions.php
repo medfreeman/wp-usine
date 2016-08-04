@@ -69,6 +69,8 @@ add_action( 'pre_comment_on_post', 'usine_validate_comment_author' );
 
 add_filter( 'comment_form_default_fields', 'usine_disable_comment_fields' );
 
+add_filter( 'pre_get_document_title', 'usine_page_title' );
+
 /* =========================================
 		HOOKED Functions
    ========================================= */
