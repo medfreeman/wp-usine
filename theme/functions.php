@@ -55,7 +55,7 @@ add_action( 'wp_enqueue_scripts', 'usine_scripts' );
 
 // expose php variables to js. just uncomment line
 // below and see function theme_scripts_localize
-// add_action( 'wp_enqueue_scripts', 'theme_scripts_localize', 20 );
+add_action( 'wp_enqueue_scripts', 'usine_scripts_localize', 20 );
 
 add_action( 'customize_register', 'usine_customize_register' );
 
@@ -194,7 +194,6 @@ if ( ! function_exists( 'usine_scripts' ) ) {
 	}
 }
 
-
 /**
  * Attach variables we want
  * to expose to our JS
@@ -209,6 +208,14 @@ if ( ! function_exists( 'usine_scripts_localize' ) ) {
 			'home'  => home_url(),
 			'theme' => get_stylesheet_directory_uri(),
 			'ajax'  => add_query_arg( $ajax_url_params, admin_url( 'admin-ajax.php' ) ),
+		) );
+
+		wp_localize_script( 'main', 'vox', array(
+			'downloadText'    => __( 'Télécharger le pdf', USINE_TEXTDOMAIN ),
+			'downloadTitle'   => __( 'Télécharger le pdf', USINE_TEXTDOMAIN ),
+			'currentItemText' => __( 'vox {current} sur {total}', USINE_TEXTDOMAIN ),
+			'previousText'    => __( 'précédent', USINE_TEXTDOMAIN ),
+			'nextText'        => __( 'suivant', USINE_TEXTDOMAIN ),
 		) );
 	}
 }

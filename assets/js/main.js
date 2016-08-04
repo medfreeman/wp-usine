@@ -38,3 +38,5 @@ import '../svg/**/*.svg!../svg/sprite/**/*.svg';
  * Your theme's js starts
  * here...
  */
+// vox colorbox
+import './scripts/vox__link.colorbox.js';

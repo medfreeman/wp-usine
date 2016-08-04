@@ -79,6 +79,7 @@
   "dependencies": {
     "babel-polyfill": "6.5.0",
     "bootstrap": "^3.3.7",
+    "jquery-colorbox": "^1.6.4",
     "lazysizes": "1.4.0",
     "picturefill": "3.0.2"
   }

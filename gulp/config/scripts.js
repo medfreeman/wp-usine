@@ -16,7 +16,8 @@ module.exports = {
 					})
 				],
 				externals: {
-					jquery: 'window.jQuery'
+					jquery: 'window.jQuery',
+					vox: 'window.vox'
 				}
 			}
 		}
