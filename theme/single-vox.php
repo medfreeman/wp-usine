@@ -1,3 +1,11 @@
+<?php
+/**
+ * Single page for vox post type.
+ *
+ * @package @@name
+ */
+
+?>
 <?php if ( is_single() ) : ?>
 	<?php get_header(); ?>
 	<?php the_post(); ?>

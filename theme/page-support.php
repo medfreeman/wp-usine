@@ -1,3 +1,11 @@
+<?php
+/**
+ * Page with support for support comments.
+ *
+ * @package @@name
+ */
+
+?>
 <?php /* Template Name: Commentaires de soutien */ ?>
 <?php get_header(); ?>
 

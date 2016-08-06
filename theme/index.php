@@ -1,2 +1,9 @@
 <?php
-// Silence is golden.
+/**
+ * Index page, needed.
+ *
+ * @package @@name
+ */
+
+?>
+<?php

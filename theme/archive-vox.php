@@ -1,7 +1,15 @@
+<?php
+/**
+ * Archive page for vox post type.
+ *
+ * @package @@name
+ */
+
+?>
 <?php get_header(); ?>
 
 	<?php
-	if ( function_exists( 'vox_is_paged' ) && ! vox_is_paged() ) { // Show content only in first page
+	if ( function_exists( 'vox_is_paged' ) && ! vox_is_paged() ) { // Show content only in first page.
 		get_template_part( 'elements/content', 'vox' );
 	}
 	?>
@@ -13,9 +21,9 @@
 
 		<?php endwhile; ?>
 
-		<?php if ( function_exists( 'vox_pagination' ) ) : // if expirimental feature is active ?>
+		<?php if ( function_exists( 'vox_pagination' ) ) : // If pagination function exists. ?>
 
-			<?php vox_pagination(); // use the page navi function ?>
+			<?php vox_pagination(); // Use the page navi function. ?>
 
 		<?php endif; ?>
 

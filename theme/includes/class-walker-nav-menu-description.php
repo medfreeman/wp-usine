@@ -5,10 +5,10 @@
  * menu with descriptions
  *
  * @author Mehdi Lahlou <http://usine.ch>
+ * @package @@name
  */
 
-
-// make sure this file is called by wp
+// Make sure this file is called by wp.
 defined( 'ABSPATH' ) or die();
 
 
@@ -34,19 +34,18 @@ class MInc_Walker_Nav_Menu_Description extends MOZ_Walker_Nav_Menu {
 	 *
 	 * @since 1.0
 	 *
-	 * @param string        $output Passed by reference. Used to append additional content.
-	 * @param object        $item   Menu item data object.
-	 * @param int           $depth  Depth of menu item. Used for padding.
-	 * @param object|array  $args   An array of arguments. @see wp_nav_menu()
-	 * @param int           $id     Current item ID.
+	 * @param string       $output Passed by reference. Used to append additional content.
+	 * @param object       $item   Menu item data object.
+	 * @param int          $depth  Depth of menu item. Used for padding.
+	 * @param object|array $args   An array of arguments. @see wp_nav_menu().
+	 * @param int          $id     Current item ID.
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
-		/// Menu Item Opening
-
+		// Menu Item Opening.
 		$item_classes = array( '__item' );
 
-		// add classes to current/parent/ancestor items
+		// Add classes to current/parent/ancestor items.
 		if ( isset( $item->current ) && $item->current ) {
 			$item_classes[] = '__item--current';
 		}
@@ -60,30 +59,32 @@ class MInc_Walker_Nav_Menu_Description extends MOZ_Walker_Nav_Menu {
 			$item_classes[] = '__item--has-children';
 		}
 
-		// BEM-ify the given sub classes
+		// BEM-ify the given sub classes.
 		$item_classes_str = MOZ_BEM::get_bem( $args->menu_class, $item_classes );
 
 		if ( isset( $item->classes[0] ) && ! empty( $item->classes[0] ) ) {
-			// the first item in the 'classes' array is the user-set class
-			// the rest of the classes are superfluous
+			// The first item in the 'classes' array is the user-set class,
+			// the rest of the classes are superfluous.
 			$item_classes_str .= " {$item->classes[0]}";
 		}
 
 		$output .= "<li class=\"$item_classes_str\">";
 
-		/// Menu Link
-
-		$attrs = array_filter( array(
-			'title'  => $item->attr_title,
-			'target' => $item->target,
-			'rel'    => $item->xfn,
-			'href'   => ( ! empty( $item->url ) && '#' !== $item->url ) ? $item->url : '',
-			'class'  => "{$args->menu_class}__link"
-		), function ( $attr ) {
-			// filter out the empty
-			// attributes
-			return ! empty( $attr );
-		});
+		// Menu Link.
+		$attrs = array_filter(
+			array(
+				'title'  => $item->attr_title,
+				'target' => $item->target,
+				'rel'    => $item->xfn,
+				'href'   => ( ! empty( $item->url ) && '#' !== $item->url ) ? $item->url : '',
+				'class'  => "{$args->menu_class}__link",
+			),
+			function ( $attr ) {
+				// Filter out the empty
+				// attributes.
+				return ! empty( $attr );
+			}
+		);
 
 		$tag = isset( $attrs['href'] ) ? 'a' : 'span';
 
@@ -93,7 +94,7 @@ class MInc_Walker_Nav_Menu_Description extends MOZ_Walker_Nav_Menu {
 
 		$output .= $args->before;
 		$output .= MOZ_Html::get_element( $tag, $attrs, $link_content );
-		// Add subtitle
+		// Add subtitle.
 		$output .= MOZ_Html::get_element( 'span', array( 'class' => 'menu__subtitle' ), isset( $attrs['title'] ) ? $attrs['title'] : '' );
 		$output .= $args->after;
 	}

@@ -1,3 +1,11 @@
+<?php
+/**
+ * Single page with content over two columns template.
+ *
+ * @package @@name
+ */
+
+?>
 <?php /* Template Name: Deux colonnes */ ?>
 <?php get_header(); ?>
 

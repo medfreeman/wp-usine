@@ -1,3 +1,11 @@
+<?php
+/**
+ * Archive page for bla post type.
+ *
+ * @package @@name
+ */
+
+?>
 <?php get_header(); ?>
 
 	<?php

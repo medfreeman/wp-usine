@@ -1,4 +1,12 @@
 <?php
+/**
+ * Template for support comments.
+ *
+ * @package @@name
+ */
+
+?>
+<?php
 	$args = array(
 			'comment_notes_before' => '',
 			'comment_notes_after' => '',

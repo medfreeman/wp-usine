@@ -4,11 +4,11 @@
  * to support Usine
  * comments format
  *
- * @author Mehdi Lahlou <http://usine.ch>
+ * @author Mehdi Lahlou <http://usine.ch>$
+ * @package @@name
  */
 
-
-// make sure this file is called by wp
+// Make sure this file is called by wp.
 defined( 'ABSPATH' ) or die();
 
 
@@ -25,8 +25,17 @@ defined( 'ABSPATH' ) or die();
  */
 class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 
-	// init classwide variables
+	/**
+	 * Init classwide variables.
+	 *
+	 * @var string $tree_type Type of tree.
+	 */
 	var $tree_type = 'comment';
+	/**
+	 * Init classwide variables.
+	 *
+	 * @var array $db_fields Database fields.
+	 */
 	var $db_fields = array( 'parent' => 'comment_parent', 'id' => 'comment_ID' );
 
 	/** CONSTRUCTOR
@@ -45,7 +54,12 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 	 * Starts the list before the CHILD elements are added. Unlike most of the walkers,
 	 * the start_lvl function means the start of a nested comment. It applies to the first
 	 * new level under the comments that are not replies. Also, it appear that, by default,
-	 * WordPress just echos the walk instead of passing it to &$output properly. Go figure.  */
+	 * WordPress just echos the walk instead of passing it to &$output properly. Go figure.
+	 *
+	 * @param string $output Html output.
+	 * @param int    $depth  Depth of element.
+	 * @param array  $args   Element arguments.
+	 */
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$GLOBALS['comment_depth'] = $depth + 1;
 
@@ -55,7 +69,12 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 	}
 
 	/** END_LVL
-	 * Ends the children list of after the elements are added. */
+	 * Ends the children list of after the elements are added.
+	 *
+	 * @param string $output Html output.
+	 * @param int    $depth  Depth of element.
+	 * @param array  $args   Element arguments.
+	 */
 	function end_lvl( &$output, $depth = 0, $args = array() ) {
 		$GLOBALS['comment_depth'] = $depth + 1;
 
@@ -64,7 +83,14 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 		<?php
 	}
 
-	/** START_EL */
+	/** START_EL
+	 *
+	 * @param string $output  Html output.
+	 * @param string $comment Content of comment.
+	 * @param int    $depth   Depth of element.
+	 * @param array  $args    Element arguments.
+	 * @param int    $id      Comment id.
+	 */
 	function start_el( &$output, $comment, $depth = 0, $args = array(), $id = 0 ) {
 		$depth++;
 		$GLOBALS['comment_depth'] = $depth;
@@ -105,6 +131,13 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 
 	<?php }
 
+	/** END_EL
+	 *
+	 * @param string $output  Html output.
+	 * @param string $comment Content of comment.
+	 * @param int    $depth   Depth of element.
+	 * @param array  $args    Element arguments.
+	 */
 	function end_el( &$output, $comment, $depth = 0, $args = array() ) {
 		?>
 
