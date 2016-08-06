@@ -3,7 +3,11 @@
  * Theme Functions &
  * Functionality
  *
+ * @package @@name
  */
+
+?>
+<?php
 
 const USINE_TEXTDOMAIN = 'usine';
 const USINE_THEME_SECTION_COLORS = 'colors';
@@ -39,9 +43,11 @@ if ( class_exists( 'WPLessPlugin' ) ) {
 	}
 }
 
-/* =========================================
+/*
+	=========================================
 		ACTION HOOKS & FILTERS
-   ========================================= */
+	=========================================
+*/
 
 /**--- Actions ---**/
 
@@ -53,9 +59,19 @@ add_action( 'wp_enqueue_scripts', 'usine_styles' );
 
 add_action( 'wp_enqueue_scripts', 'usine_scripts' );
 
-// expose php variables to js. just uncomment line
-// below and see function theme_scripts_localize
+/*
+Expose php variables to js. just uncomment line
+below and see function theme_scripts_localize.
+*/
+
+/*
+add_action( 'wp_enqueue_scripts', 'theme_scripts_localize', 20 );
+*/
+
 add_action( 'wp_enqueue_scripts', 'usine_scripts_localize', 20 );
+
+// Add inline scripts to the page head.
+add_action( 'wp_head', 'usine_head_inline_scripts', 1, 2 );
 
 add_action( 'customize_register', 'usine_customize_register' );
 
@@ -67,28 +83,32 @@ add_action( 'pre_comment_on_post', 'usine_validate_comment_author' );
 
 /**--- Filters ---**/
 
+
+add_filter( 'script_loader_tag', 'usine_script_add_async_attribute', 10, 2 );
+
 add_filter( 'comment_form_default_fields', 'usine_disable_comment_fields' );
 
 add_filter( 'pre_get_document_title', 'usine_page_title' );
 
 add_filter( 'document_title_separator', 'usine_page_title_separator' );
 
-/* =========================================
+/*
+	=========================================
 		HOOKED Functions
-   ========================================= */
+	=========================================
+*/
 
 /**--- Actions ---**/
 
-
-/**
- * Setup the theme
- *
- * @since 1.0
- */
 if ( ! function_exists( 'usine_setup' ) ) {
+	/**
+	 * Setup the theme
+	 *
+	 * @since 1.0
+	 */
 	function usine_setup() {
 
-		// Let wp know we want to use html5 for content
+		// Let wp know we want to use html5 for content.
 		add_theme_support( 'html5', array(
 			'comment-list',
 			'comment-form',
@@ -97,13 +117,14 @@ if ( ! function_exists( 'usine_setup' ) ) {
 			'caption',
 		) );
 
-		// Let wp know we want to use post thumbnails
+		// Let wp know we want to use post thumbnails.
 		add_theme_support( 'post-thumbnails', array( 'page', 'vox' ) );
 
-		// Add WP 4.1 title tag support
+		// Add WP 4.1 title tag support.
 		add_theme_support( 'title-tag' );
 
-		// Add Custom Logo Support.
+		/* Add Custom Logo Support. */
+
 		/*
 		add_theme_support( 'custom-logo', array(
 			'width'       => 181, // Example Width Size
@@ -112,31 +133,40 @@ if ( ! function_exists( 'usine_setup' ) ) {
 		) );
 		*/
 
-		// Register navigation menus for theme
+		// Register navigation menus for theme.
 		register_nav_menus( array(
-			'primary' => __( 'Menu principal', USINE_TEXTDOMAIN ),   // main nav in header
-			'left' => __( 'Menu déroulant à gauche', USINE_TEXTDOMAIN ), // secondary nav in footer
+			'primary' => __( 'Menu principal', USINE_TEXTDOMAIN ),   // Main nav in header.
+			'left' => __( 'Menu déroulant à gauche', USINE_TEXTDOMAIN ), // Secondary nav in footer.
 		) );
 
-		// Stop WP from printing emoji service on the front
+		// Stop WP from printing emoji service on the front.
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-		// Remove toolbar for all users in front end
-		show_admin_bar( false );
+		/*
+		Remove toolbar for all users in front end.
+		*/
 
-		// Register Autoloaders Loader
+		/*
+		show_admin_bar( false );
+		*/
+
+		// Register Autoloaders Loader.
 		$theme_dir = get_template_directory();
 		include "$theme_dir/library/library-loader.php";
 		include "$theme_dir/includes/includes-loader.php";
 		include "$theme_dir/components/components-loader.php";
 
-		// Register sidebars for theme
+		// Register sidebars for theme.
 		MInc_Utils::register_sidebar( 'right', __( 'Barre de droite', USINE_TEXTDOMAIN ), array( 'widget_container_element' => 'div', 'widget_title_element' => 'h4' ) );
 	}
 }
 
 if ( ! function_exists( 'usine_register_required_plugins' ) ) {
+	/**
+	 * Register required
+	 * plugins with tgmpa.
+	 */
 	function usine_register_required_plugins() {
 		$plugins = array(
 			// This is an example of how to include a plugin from the WordPress Plugin Repository.
@@ -181,13 +211,13 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 	}
 }
 
-/**
- * Register and/or Enqueue
- * Styles for the theme
- *
- * @since 1.0
- */
 if ( ! function_exists( 'usine_styles' ) ) {
+	/**
+	 * Register and/or Enqueue
+	 * Styles for the theme
+	 *
+	 * @since 1.0
+	 */
 	function usine_styles() {
 		$theme_dir = get_stylesheet_directory_uri();
 
@@ -196,14 +226,13 @@ if ( ! function_exists( 'usine_styles' ) ) {
 	}
 }
 
-
-/**
- * Register and/or Enqueue
- * Scripts for the theme
- *
- * @since 1.0
- */
 if ( ! function_exists( 'usine_scripts' ) ) {
+	/**
+	 * Register and/or Enqueue
+	 * Scripts for the theme
+	 *
+	 * @since 1.0
+	 */
 	function usine_scripts() {
 		$theme_dir = get_stylesheet_directory_uri();
 
@@ -211,13 +240,13 @@ if ( ! function_exists( 'usine_scripts' ) ) {
 	}
 }
 
-/**
- * Attach variables we want
- * to expose to our JS
- *
- * @since 3.12.0
- */
 if ( ! function_exists( 'usine_scripts_localize' ) ) {
+	/**
+	 * Attach variables we want
+	 * to expose to our JS
+	 *
+	 * @since 3.12.0
+	 */
 	function usine_scripts_localize() {
 		$ajax_url_params = array();
 
@@ -237,7 +266,29 @@ if ( ! function_exists( 'usine_scripts_localize' ) ) {
 	}
 }
 
+if ( ! function_exists( 'usine_head_inline_scripts' ) ) {
+	/**
+	 * Print inline scripts
+	 * we want in html head.
+	 */
+	function usine_head_inline_scripts() {
+		ob_start();
+		// Replace the no-js class with js on the html element.
+?>
+<script>
+	document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,'js');
+</script>
+<?php
+		echo ob_get_clean(); // WPCS: XSS ok.
+	}
+}
+
 if ( ! function_exists( 'usine_customize_register' ) ) {
+	/**
+	 * Register the theme customizations.
+	 *
+	 * @param object $wp_customize Wordpress customizer object.
+	 */
 	function usine_customize_register( $wp_customize ) {
 		$wp_customize->add_section( USINE_THEME_SECTION_COLORS, array(
 			'title' => __( 'Couleurs', USINE_TEXTDOMAIN ),
@@ -379,6 +430,11 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 }
 
 if ( ! function_exists( 'usine_customize_preview' ) ) {
+	/**
+	 * Inject the needed less variables into the theme customizer.
+	 *
+	 * @param object $wp_customize Wordpress customizer object.
+	 */
 	function usine_customize_preview( $wp_customize ) {
 		if ( class_exists( 'WPLessPlugin' ) ) {
 
@@ -391,16 +447,18 @@ if ( ! function_exists( 'usine_customize_preview' ) ) {
 	}
 }
 
-/**
- * Load custom post type archive on home page
- *
- * Reference: http://www.wpaustralia.org/wordpress-forums/topic/pre_get_posts-and-is_front_page/
- * Reference: http://wordpress.stackexchange.com/questions/30851/how-to-use-a-custom-post-type-archive-as-front-page
- */
 if ( ! function_exists( 'usine_bla_front_page' ) ) {
+	/**
+	 * Load custom post type archive on home page
+	 *
+	 * Reference: http://www.wpaustralia.org/wordpress-forums/topic/pre_get_posts-and-is_front_page/
+	 * Reference: http://wordpress.stackexchange.com/questions/30851/how-to-use-a-custom-post-type-archive-as-front-page
+	 *
+	 * @param object $query Wordpress query object.
+	 */
 	function usine_bla_front_page( $query ) {
 		global $usine_front_page;
-		// Only filter the main query on the front-end
+		// Only filter the main query on the front-end.
 		if ( is_admin() || ! $query->is_main_query() ) {
 			return;
 		}
@@ -408,12 +466,12 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 		global $wp;
 		$usine_front_page = false;
 
-		// If the latest posts are showing on the home page
+		// If the latest posts are showing on the home page.
 		if ( ( is_home() && empty( $wp->query_string ) ) ) {
 			$usine_front_page = true;
 		}
 
-		// If a static page is set as the home page
+		// If a static page is set as the home page.
 		if ( ( $query->get( 'page_id' ) === get_option( 'page_on_front' ) && get_option( 'page_on_front' ) ) || empty( $wp->query_string ) ) {
 			$usine_front_page = true;
 		}
@@ -435,7 +493,7 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 			$query->set( 'post_type', 'bla' );
 			$query->set( 'page_id', '' );
 
-			// Set properties to match an archive
+			// Set properties to match an archive.
 			$query->is_page = 0;
 			$query->is_singular = 0;
 			$query->is_post_type_archive = 1;
@@ -445,17 +503,42 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 	}
 }
 
+if ( ! function_exists( 'usine_script_add_async_attribute' ) ) {
+	/**
+	 * Add async
+	 * and defer attributes
+	 * to core.js.
+	 *
+	 * @param string $tag    Html code of script tag.
+	 * @param string $handle Script handle.
+	 */
+	function usine_script_add_async_attribute( $tag, $handle ) {
+		if ( 'core' !== $handle ) {
+			return $tag;
+		}
+		return str_replace( ' src', ' async defer src', $tag );
+	}
+}
+
 if ( ! function_exists( 'usine_validate_comment_author' ) ) {
+	/**
+	 * Validate comment and author before accepting.
+	 */
 	function usine_validate_comment_author() {
-		if ( empty( sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) ) ) { // input var ok. // WPCS: CSRF ok.
+		if ( empty( sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) ) ) { // WPCS: input var ok. // WPCS: CSRF ok.
 			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un nom.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
-		} else if ( empty( sanitize_text_field( wp_unslash( $_POST['comment'] ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['comment'] ) ) ) ) ) ) { // input var ok. // WPCS: CSRF ok.
+		} else if ( empty( sanitize_text_field( wp_unslash( $_POST['comment'] ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['comment'] ) ) ) ) ) ) { // WPCS: input var ok. // WPCS: CSRF ok.
 			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un message.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
 		}
 	}
 }
 
 if ( ! function_exists( 'usine_disable_comment_fields' ) ) {
+	/**
+	 * Disable email and url fields, add a single author field intead.
+	 *
+	 * @param array $fields Wordpress comment form fields.
+	 */
 	function usine_disable_comment_fields( $fields ) {
 		$commenter = wp_get_current_commenter();
 		$req = get_option( 'require_name_email' );
@@ -472,13 +555,13 @@ if ( ! function_exists( 'usine_disable_comment_fields' ) ) {
 	}
 }
 
-/**
- * Customize the page title.
- *
- * @param string $title The original title.
- * @return string The title to use.
- */
 if ( ! function_exists( 'usine_page_title' ) ) {
+	/**
+	 * Customize the page title.
+	 *
+	 * @param string $title The original title.
+	 * @return string The title to use.
+	 */
 	function usine_page_title( $title ) {
 		global $usine_front_page;
 		if ( $usine_front_page ) {
@@ -488,20 +571,24 @@ if ( ! function_exists( 'usine_page_title' ) ) {
 	}
 }
 
-/**
- * Customize the page title separator.
- *
- * @param string $title The original separator.
- * @return string The separator to use.
- */
 if ( ! function_exists( 'usine_page_title_separator' ) ) {
+	/**
+	 * Customize the page title separator.
+	 *
+	 * @return string The separator to use.
+	 */
 	function usine_page_title_separator() {
 		return '|';
 	}
 }
 
 if ( ! function_exists( 'usine_pagination' ) ) {
-
+	/**
+	 * Prints a custom pagination markup.
+	 *
+	 * @param string $before Html to print before the pagination markup.
+	 * @param string $after  Html to print after the pagination markup.
+	 */
 	function usine_pagination( $before = '', $after = '' ) {
 		global $wp_query;
 

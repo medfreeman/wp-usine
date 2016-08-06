@@ -3,9 +3,10 @@
  * Footer file common to all
  * templates
  *
+ * @package @@name
  */
-?>
 
+?>
 				</div>
 			</div>
 			<div class="col-md-2 wrapper--right">
@@ -15,7 +16,7 @@
 			</div>
 		</div>
 	</div>
-<?php // common footer content goes here ?>
+<?php // Common footer content goes here. ?>
 
 
 
@@ -24,3 +25,4 @@
 <?php // </body> opens in header.php ?>
 </body>
 </html>
+<?php
