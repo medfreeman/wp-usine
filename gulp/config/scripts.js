@@ -4,7 +4,8 @@
  * Config
  *
  */
-var webpack = require('webpack');
+
+const webpack = require('webpack');
 
 module.exports = {
 	options: {
@@ -12,7 +13,7 @@ module.exports = {
 			defaults: {
 				plugins: [
 					new webpack.ProvidePlugin({
-						'$': 'jquery'
+						$: 'jquery'
 					})
 				],
 				externals: {

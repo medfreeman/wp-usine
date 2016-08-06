@@ -4,10 +4,8 @@
  * Config
  *
  */
-var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
-// config
-var assets = require('../core/config/common').paths.assets;
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	options: {
