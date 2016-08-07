@@ -9,7 +9,7 @@
  *  string  prettyName         (required) The theme name as shown in the theme selector admin
  *  string  themeURI           The theme's URI
  *  string  githubThemeURI     The theme's github URI, for use with https://github.com/afragen/github-updater
- *  boolean githubReleaseAsset Whether your theme uses github release asset, for use with https://github.com/afragen/github-updater
+ *  string  githubReleaseAsset Whether your theme uses github release asset, true or false, for use with https://github.com/afragen/github-updater
  *  string  description        A short description of the theme
  *  string  parentTheme        If this is a child theme, then put the parent
  *                             theme's directory name here
