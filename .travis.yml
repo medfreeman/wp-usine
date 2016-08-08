@@ -40,5 +40,5 @@ deploy:
   file_glob: true
   file: "../${REPO_NAME}-${TRAVIS_TAG}.zip"
   on:
-    repo: medfreeman/wp-theme-starter
+    repo: medfreeman/wp-usine
     tags: true
