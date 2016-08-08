@@ -92,6 +92,8 @@ add_filter( 'pre_get_document_title', 'usine_page_title' );
 
 add_filter( 'document_title_separator', 'usine_page_title_separator' );
 
+add_filter( 'wp_kses_allowed_html', 'usine_allow_additional_attrs_in_posts', 10, 3 );
+
 /*
 	=========================================
 		HOOKED Functions
@@ -579,6 +581,17 @@ if ( ! function_exists( 'usine_page_title_separator' ) ) {
 	 */
 	function usine_page_title_separator() {
 		return '|';
+	}
+}
+
+if ( ! function_exists( 'usine_allow_additional_attrs_in_posts' ) ) {
+	function usine_allow_additional_attrs_in_posts( $tags, $context ) {
+		if ( 'post' === $context ) {
+			$allowed_img_attrs = isset( $tags['img'] ) ? $tags['img'] : array();
+			$allowed_img_attrs['data-href'] = 1;
+			$tags = array_merge( $tags, array( 'img' => $allowed_img_attrs ) );
+		}
+		return $tags;
 	}
 }
 
