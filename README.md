@@ -1,5 +1,7 @@
 # The Mozaik WordPress Theme Boilerplate
 
+[![Travis Build Status](https://img.shields.io/travis/medfreeman/wp-usine.svg?label=build)](https://travis-ci.org/medfreeman/wp-usine)
+
 This is a WordPress theme starter-kit meant to offer a first-class developer experience.
 
 ## Contents

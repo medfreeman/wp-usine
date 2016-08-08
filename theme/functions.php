@@ -193,6 +193,12 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 				'source'    => 'https://github.com/medfreeman/wp-voxusini/archive/master.zip',
 				'required'  => true,
 			),
+			array(
+				'name'      => 'Github Updater',
+				'slug'      => 'github-updater',
+				'source'    => 'https://github.com/afragen/github-updater/archive/master.zip',
+				'required'  => true,
+			),
 
 		);
 

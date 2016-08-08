@@ -24,7 +24,9 @@
 module.exports = {
 	name: 'usine',
 	prettyName: 'Usine',
-	themeURI: 'https://github.com/medfreeman/wp-theme-starter/tree/usine',
+	themeURI: 'https://github.com/medfreeman/wp-usine',
+	githubThemeURI: 'https://github.com/medfreeman/wp-usine',
+	githubReleaseAsset: 'true',
 	description: 'The 2016 theme for usine.ch. Built by Mehdi Lahlou',
 	version: '1.0.0',
 	author: 'Mehdi Lahlou <mehdi.lahlou@free.fr>',
