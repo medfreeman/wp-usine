@@ -591,6 +591,15 @@ if ( ! function_exists( 'usine_page_title_separator' ) ) {
 }
 
 if ( ! function_exists( 'usine_allow_additional_attrs_in_posts' ) ) {
+	/**
+	 * Customize the allowed tags in posts and code using wp_kses with 'post'
+	 * context.
+	 *
+	 * @param array  $tags    The original allowed tags array.
+	 * @param string $context The context.
+	 *
+	 * @return array $tags The allowed tags array.
+	 */
 	function usine_allow_additional_attrs_in_posts( $tags, $context ) {
 		if ( 'post' === $context ) {
 			$allowed_img_attrs = isset( $tags['img'] ) ? $tags['img'] : array();
