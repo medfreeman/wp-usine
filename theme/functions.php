@@ -64,10 +64,6 @@ Expose php variables to js. just uncomment line
 below and see function theme_scripts_localize.
 */
 
-/*
-add_action( 'wp_enqueue_scripts', 'theme_scripts_localize', 20 );
-*/
-
 add_action( 'wp_enqueue_scripts', 'usine_scripts_localize', 20 );
 
 // Add inline scripts to the page head.
