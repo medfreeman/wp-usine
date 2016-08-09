@@ -94,6 +94,10 @@ add_filter( 'document_title_separator', 'usine_page_title_separator' );
 
 add_filter( 'wp_kses_allowed_html', 'usine_allow_additional_attrs_in_posts', 10, 3 );
 
+add_filter( 'auto_update_theme', '__return_true' );
+
+add_filter( 'auto_update_plugin', '__return_true' );
+
 /*
 	=========================================
 		HOOKED Functions
