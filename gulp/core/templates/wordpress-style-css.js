@@ -4,8 +4,6 @@ var possibleOptions = {
 	name: 'Text Domain',
 	prettyName: 'Theme Name',
 	themeURI: 'Theme URI',
-	githubThemeURI: 'GitHub Theme URI',
-	githubReleaseAsset: 'Release Asset',
 	description: 'Description',
 	parentTheme: 'Template',
 	version: 'Version',
