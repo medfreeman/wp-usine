@@ -141,8 +141,8 @@ if ( ! function_exists( 'usine_setup' ) ) {
 
 		// Register navigation menus for theme.
 		register_nav_menus( array(
-			'primary' => __( 'Menu principal', USINE_TEXTDOMAIN ),   // Main nav in header.
-			'left' => __( 'Menu déroulant à gauche', USINE_TEXTDOMAIN ), // Secondary nav in footer.
+			'primary' => __( 'Menu principal', 'usine' ),   // Main nav in header.
+			'left' => __( 'Menu déroulant à gauche', 'usine' ), // Secondary nav in footer.
 		) );
 
 		// Stop WP from printing emoji service on the front.
@@ -164,7 +164,7 @@ if ( ! function_exists( 'usine_setup' ) ) {
 		include "$theme_dir/components/components-loader.php";
 
 		// Register sidebars for theme.
-		MInc_Utils::register_sidebar( 'right', __( 'Barre de droite', USINE_TEXTDOMAIN ), array( 'widget_container_element' => 'div', 'widget_title_element' => 'h4' ) );
+		MInc_Utils::register_sidebar( 'right', __( 'Barre de droite', 'usine' ), array( 'widget_container_element' => 'div', 'widget_title_element' => 'h4' ) );
 	}
 }
 
@@ -269,11 +269,11 @@ if ( ! function_exists( 'usine_scripts_localize' ) ) {
 		) );
 
 		wp_localize_script( 'main', 'vox', array(
-			'downloadText'    => __( 'Télécharger le pdf', USINE_TEXTDOMAIN ),
-			'downloadTitle'   => __( 'Télécharger le pdf', USINE_TEXTDOMAIN ),
-			'currentItemText' => __( 'vox {current} sur {total}', USINE_TEXTDOMAIN ),
-			'previousText'    => __( 'précédent', USINE_TEXTDOMAIN ),
-			'nextText'        => __( 'suivant', USINE_TEXTDOMAIN ),
+			'downloadText'    => __( 'Télécharger le pdf', 'usine' ),
+			'downloadTitle'   => __( 'Télécharger le pdf', 'usine' ),
+			'currentItemText' => __( 'vox {current} sur {total}', 'usine' ),
+			'previousText'    => __( 'précédent', 'usine' ),
+			'nextText'        => __( 'suivant', 'usine' ),
 		) );
 	}
 }
@@ -303,15 +303,15 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 	 */
 	function usine_customize_register( $wp_customize ) {
 		$wp_customize->add_section( USINE_THEME_SECTION_COLORS, array(
-			'title' => __( 'Couleurs', USINE_TEXTDOMAIN ),
-			'description' => __( 'Personnalisez les couleurs du thème.', USINE_TEXTDOMAIN ),
+			'title' => __( 'Couleurs', 'usine' ),
+			'description' => __( 'Personnalisez les couleurs du thème.', 'usine' ),
 			'priority' => 30,
 			'capability' => 'edit_theme_options',
 		) );
 
 		$wp_customize->add_section( USINE_THEME_SECTION_VOX, array(
-			'title' => __( 'Page des vox', USINE_TEXTDOMAIN ),
-			'description' => __( 'Choisissez la page dont le contenu s\'affichera au-dessus des vox.', USINE_TEXTDOMAIN ),
+			'title' => __( 'Page des vox', 'usine' ),
+			'description' => __( 'Choisissez la page dont le contenu s\'affichera au-dessus des vox.', 'usine' ),
 			'priority' => 200,
 			'capability' => 'edit_theme_options',
 		) );
@@ -325,7 +325,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BORDERS_COLOR_OUTSIDE, array(
-			'label' => __( 'Couleur des bordures extérieures', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur des bordures extérieures', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -337,7 +337,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BORDERS_COLOR_INSIDE, array(
-			'label' => __( 'Couleur des bordures intérieures', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur des bordures intérieures', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -349,7 +349,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND, array(
-			'label' => __( 'Couleur de fond des boutons', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur de fond des boutons', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -361,7 +361,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND_HOVER, array(
-			'label' => __( 'Couleur de fond des boutons survolés', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur de fond des boutons survolés', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -373,7 +373,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_VOX_COLOR_BACKGROUND, array(
-			'label' => __( 'Couleur de l\'icone du vox', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur de l\'icone du vox', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -385,7 +385,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_LINK_COLOR, array(
-			'label' => __( 'Couleur des liens', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur des liens', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -397,7 +397,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_LINK_COLOR_HOVER, array(
-			'label' => __( 'Couleur des liens survolés', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur des liens survolés', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -409,7 +409,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR, array(
-			'label' => __( 'Couleur des liens du menu principal', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur des liens du menu principal', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -421,7 +421,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR_HOVER, array(
-			'label' => __( 'Couleur des liens survolés du menu principal', USINE_TEXTDOMAIN ),
+			'label' => __( 'Couleur des liens survolés du menu principal', 'usine' ),
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
@@ -435,7 +435,7 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 
 		$wp_customize->add_control( USINE_THEME_MOD_VOX_PAGE, array(
 			'type' => 'dropdown-pages',
-			'label' => __( 'Page des vox', USINE_TEXTDOMAIN ),
+			'label' => __( 'Page des vox', 'usine' ),
 			'section' => USINE_THEME_SECTION_VOX,
 		) );
 	}
@@ -538,9 +538,9 @@ if ( ! function_exists( 'usine_validate_comment_author' ) ) {
 	 */
 	function usine_validate_comment_author() {
 		if ( empty( sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['author'] ) ) ) ) ) { // WPCS: input var ok. // WPCS: CSRF ok.
-			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un nom.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
+			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un nom.', 'usine' ), array( 'strong' => array() ) ) );
 		} else if ( empty( sanitize_text_field( wp_unslash( $_POST['comment'] ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['comment'] ) ) ) ) ) ) { // WPCS: input var ok. // WPCS: CSRF ok.
-			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un message.', USINE_TEXTDOMAIN ), array( 'strong' => array() ) ) );
+			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un message.', 'usine' ), array( 'strong' => array() ) ) );
 		}
 	}
 }
@@ -576,7 +576,7 @@ if ( ! function_exists( 'usine_disable_comment_fields' ) ) {
 		$req = get_option( 'require_name_email' );
 		$aria_req = ( $req ? " aria-required='true'" : '' );
 
-		$fields['author'] = '<p class="comment-form-author"><label for="author">' . __( 'Nom', USINE_TEXTDOMAIN ) . ' ' . __( '(entrez également votre organisation, fonction.. si vous le souhaitez)', USINE_TEXTDOMAIN ) . '</label> ' .
+		$fields['author'] = '<p class="comment-form-author"><label for="author">' . __( 'Nom', 'usine' ) . ' ' . __( '(entrez également votre organisation, fonction.. si vous le souhaitez)', 'usine' ) . '</label> ' .
 			( $req ? '<span class="required">*</span>' : '' ) .
 			'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
 			'" size="30"' . $aria_req . ' /></p>';

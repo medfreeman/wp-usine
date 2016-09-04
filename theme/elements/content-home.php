@@ -25,4 +25,3 @@ if ( $front_page_id ) {
 		wp_reset_postdata();
 	endif;
 }
-?>

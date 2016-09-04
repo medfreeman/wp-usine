@@ -18,7 +18,7 @@
 							
 						<h2><?php the_title(); ?></h2>
 
-						<p class="meta"><?php esc_html_e( __( 'Posté le', 'wp-usine' ) ); ?> <time datetime="<?php esc_attr_e( the_time( 'Y-m-j' ) ); ?>" pubdate><?php esc_html_e( date_i18n( 'j F Y', get_the_time( 'U' ) ) ); ?></time>.</p>
+						<p class="meta"><?php esc_html_e( 'Posté le', 'usine' ); ?> <time datetime="<?php echo esc_attr( the_time( 'Y-m-j' ) ); ?>" pubdate><?php echo esc_html( date_i18n( 'j F Y', get_the_time( 'U' ) ) ); ?></time>.</p>
 
 					</header> <!-- end article header -->
 

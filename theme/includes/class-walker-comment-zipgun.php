@@ -44,7 +44,7 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 	function __construct() {
 		?>
 
-		<h3 class="comment__title"><?php esc_html_e( __( 'Vos messages de soutien', USINE_TEXTDOMAIN ) ); ?></h3>
+		<h3 class="comment__title"><?php esc_html_e( 'Vos messages de soutien', 'usine' ); ?></h3>
 		<ul class="comment__list">
 
 		<?php
@@ -103,7 +103,7 @@ class MInc_Walker_Comment_ZipGun extends Walker_Comment {
 				<div id="comment-content-<?php comment_ID(); ?>" class="comment__content">
 					<?php if ( ! $comment->comment_approved ) : ?>
 					<em class="comment__message comment-awaiting-moderation">
-						<?php esc_html_e( __( 'Votre message est en attente de modération.', USINE_TEXTDOMAIN ) ); ?>
+						<?php esc_html_e( 'Votre message est en attente de modération.', 'usine' ); ?>
 					</em>
 
 					<?php else : comment_text(); ?>

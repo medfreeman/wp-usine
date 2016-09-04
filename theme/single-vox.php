@@ -17,7 +17,7 @@ $year = get_post_meta( get_the_ID(), 'vox_year', true );
 if ( $year !== $current_year ) :
 	$current_year = $year;
 ?>
-				<div class="vox__year"><h4 class="vox__year_heading"><?php esc_html_e( $year ); ?></h4></div>
+				<div class="vox__year"><h4 class="vox__year_heading"><?php echo esc_html( $year ); ?></h4></div>
 <?php
 endif;
 ?>
@@ -26,7 +26,7 @@ endif;
 
 					<header>
 						<figure>
-							<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>" rel="<?php esc_attr_e( $year ); ?>" class="vox__link"><?php the_post_thumbnail( 'vox-thumb' ); ?></a>
+							<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>" rel="<?php echo esc_attr( $year ); ?>" class="vox__link"><?php the_post_thumbnail( 'vox-thumb' ); ?></a>
 						</figure>
 						<span class="vox__title"><?php the_title(); ?></span>
 					</header> <!-- end article header -->

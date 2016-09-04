@@ -22,4 +22,3 @@
 
 		wp_reset_postdata();
 	endif;
-?>
