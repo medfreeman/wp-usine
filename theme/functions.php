@@ -79,6 +79,8 @@ add_action( 'pre_comment_on_post', 'usine_validate_comment_author' );
 
 add_action( 'admin_init', 'usine_handle_github_update' );
 
+add_action( 'get_header', 'usine_remove_admin_bar_bump' );
+
 /**--- Filters ---**/
 
 
@@ -551,6 +553,15 @@ if ( ! function_exists( 'usine_handle_github_update' ) ) {
 		if ( class_exists( 'GitHubUpdater' ) ) {
 			new GitHubUpdater( 'theme', __DIR__ );
 		}
+	}
+}
+
+if ( ! function_exists( 'usine_remove_admin_bar_bump' ) ) {
+	/**
+	 * Removes admin bar 28px bump to allow viewing the site correctly while connected
+	 */
+	function usine_remove_admin_bar_bump() {
+		remove_action( 'wp_head', '_admin_bar_bump_cb' );
 	}
 }
 
