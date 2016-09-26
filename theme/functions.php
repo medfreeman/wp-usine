@@ -77,8 +77,6 @@ add_action( 'pre_get_posts', 'usine_bla_front_page' );
 
 add_action( 'pre_comment_on_post', 'usine_validate_comment_author' );
 
-add_action( 'admin_init', 'usine_handle_github_update' );
-
 add_action( 'get_header', 'usine_remove_admin_bar_bump' );
 
 /**--- Filters ---**/
@@ -198,9 +196,9 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 				'required'  => true,
 			),
 			array(
-				'name'      => 'Github updater',
-				'slug'      => 'wp-github-updater',
-				'source'    => 'https://github.com/medfreeman/wp-github-updater/archive/master.zip',
+				'name'      => 'GitHub Updater',
+				'slug'      => 'github-updater',
+				'source'    => 'https://github.com/afragen/github-updater/archive/5.6.1.zip',
 				'required'  => true,
 			),
 
@@ -541,17 +539,6 @@ if ( ! function_exists( 'usine_validate_comment_author' ) ) {
 			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un nom.', 'usine' ), array( 'strong' => array() ) ) );
 		} else if ( empty( sanitize_text_field( wp_unslash( $_POST['comment'] ) ) || ( ! preg_match( '/[^\s]/', sanitize_text_field( wp_unslash( $_POST['comment'] ) ) ) ) ) ) { // WPCS: input var ok. // WPCS: CSRF ok.
 			wp_die( wp_kses( __( '<strong>Erreur</strong> : Veuillez saisir un message.', 'usine' ), array( 'strong' => array() ) ) );
-		}
-	}
-}
-
-if ( ! function_exists( 'usine_handle_github_update' ) ) {
-	/**
-	 * Handles github plugin update by using Github updater class
-	 */
-	function usine_handle_github_update() {
-		if ( class_exists( 'GitHubUpdater' ) ) {
-			new GitHubUpdater( 'theme', __DIR__ );
 		}
 	}
 }
