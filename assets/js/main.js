@@ -1,3 +1,7 @@
+/* eslint-disable import/imports-first */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint import/no-unresolved: [2, { ignore: ['^glob:'] }] */
+
 /**
  * Setup webpack public path
  * to enable lazy-including of
@@ -7,7 +11,7 @@
 import './vendor/webpack.publicPath';
 
 /* Bootstrap */
-import 'bootstrap-webpack!./vendor/bootstrap.config.js';
+import 'bootstrap-webpack!./vendor/bootstrap.config';
 
 /**
  * Import
@@ -39,8 +43,8 @@ import 'glob:../svg/**/*.svg!../svg/sprite/**/*.svg';
  * here...
  */
 // home link click event
-import './scripts/link__location.js';
+import './scripts/link__location';
 // radio listen button
-import './scripts/radio__listen.js';
+import './scripts/radio__listen';
 // vox colorbox
-import './scripts/vox__link.colorbox.js';
+import './scripts/vox__link.colorbox';

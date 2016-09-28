@@ -1,6 +1,6 @@
 /* global vox */
 import 'jquery-colorbox';
-import 'jquery-colorbox/i18n/jquery.colorbox-fr.js';
+import 'jquery-colorbox/i18n/jquery.colorbox-fr';
 import 'jquery-colorbox/example4/colorbox.css';
 import enquire from 'enquire';
 
