@@ -7,6 +7,7 @@
 
 // config
 const paths = require('../core/config/common').paths;
+
 const theme = paths.theme;
 
 module.exports = {
