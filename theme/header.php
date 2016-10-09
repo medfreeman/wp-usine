@@ -49,9 +49,11 @@
 		<div class="row">
 		<?php // <div> .row closes in footer.php ?>
 			<div class="col-md-2 wrapper--left">
-				<div class="menu--left__container">
-					<h4 class="widget__header"><?php MInc_Utils::nav_menu_name( 'primary-menu' ); ?></h4>
-					<?php MOZ_Menu::nav_menu( 'left' ); ?>
+				<div class="sidebar">
+					<div class="menu--left__container">
+						<h4 class="widget__header"><?php MInc_Utils::nav_menu_name( 'primary-menu' ); ?></h4>
+						<?php MOZ_Menu::nav_menu( 'left' ); ?>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-2 col-md-offset-2 col-md-push-8 wrapper--right">
