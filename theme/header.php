@@ -47,13 +47,19 @@
 		</div>
 
 		<div class="row">
+		<?php // <div> .row closes in footer.php ?>
 			<div class="col-md-2 wrapper--left">
 				<div class="menu--left__container">
 					<h4 class="widget__header"><?php MInc_Utils::nav_menu_name( 'primary-menu' ); ?></h4>
 					<?php MOZ_Menu::nav_menu( 'left' ); ?>
 				</div>
 			</div>
-			<div class="col-md-8 col-md-offset-2 wrapper--content">
+			<div class="col-md-2 col-md-offset-2 col-md-push-8 wrapper--right">
+				<div class="widgetbar--right__container">
+					<?php MInc_Utils::sidebar( 'right' ); ?>
+				</div>
+			</div>
+			<div class="col-md-8 col-md-offset-4 col-md-pull-2 wrapper--content">
 			<?php // <div> .col-md-8 closes in footer.php ?>
 				<div class="content__container">
 				<?php // <div> .content__container closes in footer.php ?>
