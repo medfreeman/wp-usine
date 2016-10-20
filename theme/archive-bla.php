@@ -9,7 +9,9 @@
 <?php get_header(); ?>
 
 	<?php
-		get_template_part( 'elements/content', 'home' );
+	if ( ! is_paged() ) {
+		get_template_part( 'elements/content', 'bla' );
+	}
 	?>
 
 	<?php if ( have_posts() ) : ?>

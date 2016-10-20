@@ -1,17 +1,15 @@
 <?php
 /**
- * Content of the page selected as home in wordpress admin.
+ * Content of the page selected to be shown over blas archive page.
  *
  * @package @@name
  */
 
 ?>
 <?php
-global $post;
-$front_page_id = get_option( 'page_on_front' );
-if ( $front_page_id ) {
+	global $post;
 	$args = array(
-		'page_id' => $front_page_id,
+		'page_id' => absint( get_theme_mod( USINE_THEME_MOD_BLA_PAGE ) ),
 	);
 	$page_query = new WP_Query( $args );
 
@@ -24,4 +22,3 @@ if ( $front_page_id ) {
 
 		wp_reset_postdata();
 	endif;
-}

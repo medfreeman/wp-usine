@@ -11,6 +11,7 @@
 
 const USINE_TEXTDOMAIN = 'usine';
 const USINE_THEME_SECTION_COLORS = 'colors';
+const USINE_THEME_SECTION_BLA = 'bla';
 const USINE_THEME_SECTION_VOX = 'vox';
 const USINE_THEME_MOD_BORDERS_COLOR_OUTSIDE          = 'color_border_outside';
 const USINE_THEME_MOD_BORDERS_COLOR_INSIDE           = 'color_border_inside';
@@ -19,6 +20,7 @@ const USINE_THEME_MOD_BUTTONS_COLOR_BACKGROUND_HOVER = 'color_button_hover_backg
 const USINE_THEME_MOD_VOX_COLOR_BACKGROUND           = 'color_vox_background';
 const USINE_THEME_MOD_LINK_COLOR                     = 'color_link';
 const USINE_THEME_MOD_LINK_COLOR_HOVER               = 'color_link_hover';
+const USINE_THEME_MOD_BLA_PAGE                       = 'bla_page';
 const USINE_THEME_MOD_VOX_PAGE                       = 'vox_page';
 const USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR        = 'color_primary_menu_link';
 const USINE_THEME_MOD_PRIMARY_MENU_LINK_COLOR_HOVER  = 'color_primary_menu_link_hover';
@@ -307,6 +309,13 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 			'capability' => 'edit_theme_options',
 		) );
 
+		$wp_customize->add_section( USINE_THEME_SECTION_BLA, array(
+			'title' => __( 'Page des bla', 'usine' ),
+			'description' => __( 'Choisissez la page dont le contenu s\'affichera au-dessus des blas.', 'usine' ),
+			'priority' => 200,
+			'capability' => 'edit_theme_options',
+		) );
+
 		$wp_customize->add_section( USINE_THEME_SECTION_VOX, array(
 			'title' => __( 'Page des vox', 'usine' ),
 			'description' => __( 'Choisissez la page dont le contenu s\'affichera au-dessus des vox.', 'usine' ),
@@ -423,6 +432,20 @@ if ( ! function_exists( 'usine_customize_register' ) ) {
 			'section' => USINE_THEME_SECTION_COLORS,
 		) ) );
 
+		/* Bla section */
+		$wp_customize->add_setting( USINE_THEME_MOD_BLA_PAGE, array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'default' => 0,
+			'transport' => 'refresh',
+		) );
+
+		$wp_customize->add_control( USINE_THEME_MOD_BLA_PAGE, array(
+			'type' => 'dropdown-pages',
+			'label' => __( 'Page des blas', 'usine' ),
+			'section' => USINE_THEME_SECTION_BLA,
+		) );
+
 		/* Vox section */
 		$wp_customize->add_setting( USINE_THEME_MOD_VOX_PAGE, array(
 			'type' => 'theme_mod',
@@ -467,34 +490,26 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 	 * @param object $query Wordpress query object.
 	 */
 	function usine_bla_front_page( $query ) {
-		global $usine_front_page;
 		// Only filter the main query on the front-end.
 		if ( is_admin() || ! $query->is_main_query() ) {
 			return;
 		}
 
-		global $wp;
+		global $wp, $usine_front_page;
 		$usine_front_page = false;
 
 		// If the latest posts are showing on the home page.
-		if ( ( is_home() && empty( $wp->query_string ) ) ) {
-			$usine_front_page = true;
-		}
-
-		// If a static page is set as the home page.
-		if ( ( $query->get( 'page_id' ) === get_option( 'page_on_front' ) && get_option( 'page_on_front' ) ) || empty( $wp->query_string ) ) {
+		if ( ( is_home() || is_front_page() ) && empty( get_option( 'page_for_posts' ) ) ) {
 			$usine_front_page = true;
 		}
 
 		if ( $usine_front_page ) :
-
-			$paged = absint( $query->get( 'page' ) );
-			$paged = $paged ? $paged : 1;
-
-			$query->set( 'paged', $paged );
-
 			$posts_per_page = get_option( 'posts_per_page' );
 			if ( -1 !== $posts_per_page ) {
+				$paged = absint( $query->get( 'paged' ) );
+				$paged = $paged ? $paged : 1;
+				$query->set( 'paged', $paged );
+
 				$query->set( 'posts_per_page', $posts_per_page );
 				$count_posts = wp_count_posts( 'bla' )->publish;
 				$query->set( 'max_num_pages', ceil( $count_posts / $posts_per_page ) );
@@ -505,6 +520,7 @@ if ( ! function_exists( 'usine_bla_front_page' ) ) {
 
 			// Set properties to match an archive.
 			$query->is_page = 0;
+			$query->is_home = 0;
 			$query->is_singular = 0;
 			$query->is_post_type_archive = 1;
 			$query->is_archive = 1;
