@@ -19,4 +19,10 @@ module.exports = {
 			`!${paths.assets.dest}/**/*`
 		]
 	},
+
+	options: {
+		watch: {
+			usePolling: true
+		}
+	}
 };
