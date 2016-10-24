@@ -5,8 +5,10 @@
  * @package @@name
  */
 
+/*
+ * Template Name: Commentaires de soutien
+ */
 ?>
-<?php /* Template Name: Commentaires de soutien */ ?>
 <?php get_header(); ?>
 
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
