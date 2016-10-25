@@ -16,7 +16,7 @@
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
 					<header>
-						<?php the_post_thumbnail( 'full' ); ?>
+						<?php the_post_thumbnail( 'full', array( 'class' => 'aligncenter' ) ); ?>
 					</header> <!-- end article header -->
 
 					<section class="post_content clearfix" itemprop="articleBody">
