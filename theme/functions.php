@@ -94,6 +94,8 @@ add_filter( 'document_title_separator', 'usine_page_title_separator' );
 
 add_filter( 'wp_kses_allowed_html', 'usine_allow_additional_attrs_in_posts', 10, 3 );
 
+add_filter( 'wp_calculate_image_sizes', 'usine_content_image_sizes_attr', 10 , 2 );
+
 add_filter( 'auto_update_theme', '__return_true' );
 
 add_filter( 'auto_update_plugin', '__return_true' );
@@ -634,6 +636,22 @@ if ( ! function_exists( 'usine_allow_additional_attrs_in_posts' ) ) {
 			$tags = array_merge( $tags, array( 'img' => $allowed_img_attrs ) );
 		}
 		return $tags;
+	}
+}
+
+if ( ! function_exists( 'usine_content_image_sizes_attr' ) ) {
+	/**
+	 * Customize the sizes attributes in images included in posts
+	 * to allow proper responsive images adapted to the theme.
+	 *
+	 * @param string       $sizes   The original sizes attribute.
+	 * @param array|string $size    Requested size.
+	 * Image size or array of width and height values in pixels (in that order).
+	 *
+	 * @return string      $sizes   The new sizes attribute.
+	 */
+	function usine_content_image_sizes_attr( $sizes, $size ) {
+		return '(min-width: 992px) calc(66.66vw - 40px), calc(100vw - 60px)';
 	}
 }
 
