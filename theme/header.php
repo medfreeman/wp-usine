@@ -51,7 +51,7 @@
 			<div class="col-md-2 wrapper--left">
 				<div class="sidebar">
 					<div class="menu--left__container">
-						<h4 class="widget__header"><?php MInc_Utils::nav_menu_name( 'left' ); ?></h4>
+						<h4 class="widget__header"><?php MInc_Menu::nav_menu_name( 'left' ); ?></h4>
 						<?php MOZ_Menu::nav_menu( 'left' ); ?>
 					</div>
 				</div>
