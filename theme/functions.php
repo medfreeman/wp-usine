@@ -94,7 +94,7 @@ add_filter( 'document_title_separator', 'usine_page_title_separator' );
 
 add_filter( 'wp_kses_allowed_html', 'usine_allow_additional_attrs_in_posts', 10, 3 );
 
-add_filter( 'wp_calculate_image_sizes', 'usine_content_image_sizes_attr', 10 , 2 );
+add_filter( 'wp_calculate_image_sizes', 'usine_content_image_sizes_attr', 10 , 5 );
 
 add_filter( 'auto_update_theme', '__return_true' );
 
@@ -650,7 +650,16 @@ if ( ! function_exists( 'usine_content_image_sizes_attr' ) ) {
 	 *
 	 * @return string      $sizes   The new sizes attribute.
 	 */
-	function usine_content_image_sizes_attr( $sizes, $size ) {
+	function usine_content_image_sizes_attr( $sizes, $size, $image_src, $image_meta, $attachment_id ) {
+		if ( is_admin() ) {
+			return $sizes;
+		}
+
+		$size = is_array( $size ) ? $size[0] : $size;
+		// If it is a thumbnail, let wordpress handle the sizes.
+		if ( 125 === $size ) {
+			return $sizes;
+		}
 		return '(min-width: 992px) calc(66.66vw - 40px), calc(100vw - 60px)';
 	}
 }
