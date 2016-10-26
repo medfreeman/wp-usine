@@ -1,0 +1,14 @@
+/* =========================================
+		Vertical spacing in small and medium sizes
+   ========================================= */
+
+.col-sm-spacer {
+	.margin-bottom-relative(@col-sm-bottom-margin);
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.col-sm-spacer {
+		margin-bottom: 0;
+	}
+}

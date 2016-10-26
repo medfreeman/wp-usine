@@ -28,7 +28,7 @@
 
 		<div class="row wrapper--header">
 			<div class="header__container vertical-align-cols center">
-				<div class="col-md-2">
+				<div class="col-md-2 col-sm-spacer">
 						<?php
 						$logo_attrs = array(
 							'class' => 'header__logo link__location',
@@ -40,7 +40,7 @@
 						?>
 						<?php MOZ_Html::sc_element( 'img', $logo_attrs ); ?>
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-10 col-sm-spacer">
 						<div class="menu--primary__container visible-md-block visible-lg-block">
 							<?php MOZ_Menu::nav_menu( 'primary', array( 'walker' => new MInc_Walker_Nav_Menu_Description ) ); ?>
 						</div>
@@ -55,7 +55,7 @@
 
 		<div class="row">
 		<?php // <div> .row closes in footer.php ?>
-			<div class="col-md-2 wrapper--left">
+			<div class="col-md-2 col-sm-spacer wrapper--left">
 				<div class="sidebar">
 					<div class="menu--left__container visible-md-block visible-lg-block">
 						<h4 class="widget__header"><?php MInc_Menu::nav_menu_name( 'left' ); ?></h4>
@@ -68,12 +68,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2 col-md-offset-2 col-md-push-8 wrapper--right">
+			<div class="col-md-2 col-sm-spacer col-md-offset-2 col-md-push-8 wrapper--right">
 				<div class="widgetbar--right__container">
 					<?php MInc_Utils::sidebar( 'right' ); ?>
 				</div>
 			</div>
-			<div class="col-md-8 col-md-offset-4 col-md-pull-2 wrapper--content">
+			<div class="col-md-8 col-sm-spacer col-md-offset-4 col-md-pull-2 wrapper--content">
 			<?php // <div> .col-md-8 closes in footer.php ?>
 				<div class="content__container">
 				<?php // <div> .content__container closes in footer.php ?>
