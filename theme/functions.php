@@ -190,13 +190,13 @@ if ( ! function_exists( 'usine_register_required_plugins' ) ) {
 			array(
 				'name'      => 'Bla',
 				'slug'      => 'wp-bla',
-				'source'    => 'https://github.com/medfreeman/wp-bla/archive/master.zip',
+				'source'    => 'https://github.com/usine/wp-bla/archive/master.zip',
 				'required'  => true,
 			),
 			array(
 				'name'      => 'Vox Usini',
 				'slug'      => 'wp-voxusini',
-				'source'    => 'https://github.com/medfreeman/wp-voxusini/archive/master.zip',
+				'source'    => 'https://github.com/usine/wp-voxusini/archive/master.zip',
 				'required'  => true,
 			),
 			array(
