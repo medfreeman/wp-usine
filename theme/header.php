@@ -41,7 +41,14 @@
 						<?php MOZ_Html::sc_element( 'img', $logo_attrs ); ?>
 				</div>
 				<div class="col-md-10">
-					<?php MOZ_Menu::nav_menu( 'primary', array( 'walker' => new MInc_Walker_Nav_Menu_Description ) ); ?>
+						<div class="menu--primary__container visible-md-block visible-lg-block">
+							<?php MOZ_Menu::nav_menu( 'primary', array( 'walker' => new MInc_Walker_Nav_Menu_Description ) ); ?>
+						</div>
+						<div class="menu--primary__container hidden-md hidden-lg">
+							<?php MInc_Menu::nav_menu_dropdown( 'primary', array(
+								'wrap_class' => 'dropdown-menu-center',
+							) ); ?>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -50,9 +57,14 @@
 		<?php // <div> .row closes in footer.php ?>
 			<div class="col-md-2 wrapper--left">
 				<div class="sidebar">
-					<div class="menu--left__container">
+					<div class="menu--left__container visible-md-block visible-lg-block">
 						<h4 class="widget__header"><?php MInc_Menu::nav_menu_name( 'left' ); ?></h4>
 						<?php MOZ_Menu::nav_menu( 'left' ); ?>
+					</div>
+					<div class="menu--left__container hidden-md hidden-lg">
+						<?php MInc_Menu::nav_menu_dropdown( 'left', array(
+							'wrap_class' => 'dropdown-menu-center',
+						) ); ?>
 					</div>
 				</div>
 			</div>
@@ -66,4 +78,3 @@
 				<div class="content__container">
 				<?php // <div> .content__container closes in footer.php ?>
 <?php
-
