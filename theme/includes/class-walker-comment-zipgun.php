@@ -4,7 +4,7 @@
  * to support Usine
  * comments format
  *
- * @author Mehdi Lahlou <http://usine.ch>$
+ * @author Mehdi Lahlou <http://usine.ch>
  * @package @@name
  */
 
