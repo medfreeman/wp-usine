@@ -126,6 +126,7 @@ class MInc_Menu {
 			: $menu_class;
 
 		$args = array_merge( array(
+			'btn_class'        => 'btn-default',
 			'container'        => 'nav',
 			'container_class'  => $container_class,
 			'container_id'     => '',
@@ -169,7 +170,7 @@ class MInc_Menu {
 			}
 		}
 
-		$nav_menu .= "<button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"{$button_id}\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+		$nav_menu .= "<button class=\"btn {$args['btn_class']} dropdown-toggle\" type=\"button\" id=\"{$button_id}\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
 				{$args['name']}
 				<span class=\"caret\"></span>
 			</button>";
