@@ -10,6 +10,9 @@
 /**
  * Simple Links widget
  */
+.widget_link_list{
+	display: none;
+}
 
 .widget_link_list ul {
 	.margin-relative(@widget-title-vertical-space, 0, 0, 0);
@@ -22,4 +25,11 @@
 
 .widget_link_list a {
 	@link-text-decoration-none();
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+	.widget_link_list{
+		display: block;
+	}
 }
