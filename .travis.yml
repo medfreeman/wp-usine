@@ -29,15 +29,16 @@ env:
   - PROJECT_NAME=$(./travis/getName.js)
 before_deploy:
 - cd ..
-- zip -r "${REPO_NAME}-${TRAVIS_TAG}.zip" ${PROJECT_NAME}
-- cd $TRAVIS_BUILD_DIR
+- rm -rf ${REPO_NAME}
+- mv ${PROJECT_NAME} ${REPO_NAME}
+- zip -r "${REPO_NAME}-${TRAVIS_TAG}.zip" ${REPO_NAME}
 deploy:
   provider: releases
   skip_cleanup: true
   api-key:
     secure: T7e3+CUdArmcKdvgqB6p8ntzp3zRoc+kDPqw6HLyUnV6+uX9lNgNUIdr023nnsGSBq0JEzX4fb0fEmZ1V3esqV1uGkK+hYU7pjYhhhHUHSGdqUDrUSSDq5Yhl8h5bdAUnkDSTPlJR3R32kQ9XcRaa8tVewgPudoN+Gq+8t5msp9UC1bwfjh3x2um+z0L+BCVxEEPXNX3jF0Xe4TfZ+Oy6PiBPQ46Dq9C9QstyN6G2m5BAQx5r4bNaJlfOh7vaSLNgmTbL3aYEUdc9mtWAYnYd5hX2ndjBjZSlVHsRJ7+HqX1i/UmV6pcwLuzeEDi3Dp+CdeHO5zOEncKj/JKPI8a3/KubdLFBagwL3Uof2+t1TQTfyYPqmBaK8EaXawRD2P9YGJ4VZMTkTfYtdSuhOsHyKoax10jlt8RzS5Dc60RjVTa6dSU59klwwGXP6jrFCCWkCIN7e8JsAk4MYZy9axK3KoaSrKhavwv9VfFFJoyA/zZM+u0fskkve7fGM6qQPX9DyzefY94y16NzPWvvo2TcmML3xNWlBLmXiZW5wHRTtJPeUzl/y4GkvphPDfthxCXuAuCkxm3RLSAZMb/bdzO0mTpjIgZ18k0IuE+39r2jiRjnr+qwA0kVi4BFlxKpTGvCursbbgZU/g4Z/mQlacvTzVVwB+SmZSW2T+70dPz90Q=
   file_glob: true
-  file: "../${REPO_NAME}-${TRAVIS_TAG}.zip"
+  file: "${REPO_NAME}-${TRAVIS_TAG}.zip"
   on:
     repo: usine/wp-usine
     tags: true
