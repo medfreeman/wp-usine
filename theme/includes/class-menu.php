@@ -122,7 +122,7 @@ class MInc_Menu {
 			: 'menu';
 
 		$container_class = 'menu' === $menu_class
-			? "$menu_class {$menu_class}-dropdown--{$theme_location} dropdown"
+			? "$menu_class {$menu_class}-dropdown {$menu_class}-dropdown--{$theme_location} dropdown"
 			: $menu_class;
 
 		$args = array_merge( array(
