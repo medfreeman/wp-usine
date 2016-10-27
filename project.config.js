@@ -26,7 +26,7 @@ module.exports = {
 	githubThemeURI: 'https://github.com/usine/wp-usine',
 	releaseAsset: 'true',
 	description: 'The 2016 theme for usine.ch. Built by Mehdi Lahlou',
-	version: '1.3.2',
+	version: '1.3.3',
 	author: 'Mehdi Lahlou <mehdi.lahlou@free.fr>',
 	authorURI: 'https://github.com/medfreeman',
 	license: 'GPLv2 or later'
