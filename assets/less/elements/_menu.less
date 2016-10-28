@@ -103,6 +103,7 @@
 
 .menu--left .menu__item {
 	.font-size-relative(@menu--left-font-size);
+	font-size: unit(@menu--left-font-size-vw, vw);
 	.line-height-relative(@menu--left-line-height);
 	.padding-relative(@menu--left-link-padding-v, @menu--left-link-padding-h);
 	width: 100%;
@@ -127,6 +128,7 @@
 		flex-direction: column;
 		align-items: stretch;
 		.top-relative(@widget__header-font-size + @widget-title-vertical-space);
+		top: calc(~"@{widget__header-font-size}px + 4vh");
 		bottom: 0;
 	}
 
@@ -139,6 +141,7 @@
 
 	.menu--left .menu__item:hover {
 		.font-size-relative(@menu--left-font-size-grow);
+		font-size: unit(@menu--left-font-size-grow-vw, vw);
 		font-weight: bold;
 	}
 }
